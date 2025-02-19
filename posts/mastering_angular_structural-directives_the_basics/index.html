@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Mastering Angular Structural Directives - The basics">
+    <meta name="author" content="Konstantin Nazarov">
+    <meta property="article:published_time" content="DATE"/>
+
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="me" href="https://mas.to/@amadv" />
+    <meta name="fediverse:creator" content="@amadv@mas.to" />
+    <title>Mastering Angular Structural Directives - The basics</title>
+    <link rel="alternate" type="application/rss+xml"
+        title="RSS Feed for amadv.github.io" href="/rss.xml" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="/">∴ Aaron Madved</a>
+    </header>
+    <nav class="menu">
+        <a href="/posts">posts</a>
+        <a href="https://github.com/amadv">github</a>
+        <!-- <a href="/projects">projects</a> -->
+        <!-- <a href="/cv">cv</a> -->
+        <a href="/uses">uses</a>
+        <a href="/contact">contact</a>
+        <a href="/rss.xml"><img src="/rss.png" style="height: 15px; width: auto; vertical-align:middle;"></img></a>
+    </nav>
+    <main>
+      <h1>Mastering Angular Structural Directives - The basics</h1>
+<p>Structural directives in Angular are one of the framework’s most powerful tools. We encounter them early in our Angular journeys. They are integral to developing even the most basic Angular applications.</p>
+<p>Whether it is rendering a list of todos or toggling some icon once a todo is completed, <em>ngFor and </em>ngIf become familiar faces in the earliest days as Angular developers. From then on, they stay our trusted partners on which we frequently rely in day-to-day development tasks. However, the inner workings of these directives are often a mystery to both new and experienced developers.</p>
+<p>In this series, we will delve deeper into the internal workings of structural directives, providing a comprehensive understanding of what is going on under the asterisk. In this article, we will examine what needs to happen for a structural directive to render to the DOM.</p>
+<h2>*easyToSpot - A minimal introduction to structural directive’s micro-syntax</h2>
+<p>You probably spotted two of the built-in structural directives: NgIf and NgFor. They were easy to identify, as I followed the convention laid out directly in the Angular docs: <em>When structural directives are applied they generally are prefixed by an asterisk, *.</em> More interestingly, the docs also state that Angular uses this convention to wrap the element the directive is applied to, also known as the host element, with an <code>ng-template</code>:</p>
+<pre><code class="language-ts">&lt;div *ngIf=&quot;hero&quot;&gt;{{hero.name}}&lt;/div&gt;
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-ts">&lt;ng-template [ngIf]=&quot;hero&quot;&gt;
+  &lt;div&gt;{{hero.name}}&lt;/div&gt;
+&lt;/ng-template&gt;
+</code></pre>
+<p>Looking at this longhand version, we can identify two ways of defining structural directives:
+1. By <strong>what they do</strong> (as the official documentation does): <em>Structural directives are directives that change the DOM layout by adding and removing DOM elements.</em>
+2. By <strong>what they are</strong>: Directives that are applied to <code>ng-template</code>s and come with an optional micro syntax that makes our HTML nicer to read.</p>
+<h2>Directive superpowers - Rendering to the DOM with the help of dependency injection</h2>
+<p>Knowing that we are dealing with a directive we can take full advantage of Angular's dependency injection (DI). This allows us to access the directive's host by simply injecting it into our directive. Given that we know the host's type. The following example demonstrates this:</p>
+<pre><code class="language-ts">@Component({
+  // in our app
+  selector: 'app',
+  // ourDirective is applied to the host component
+  template: `&lt;host ourDirective &gt;&lt;/host&gt;`,
+})
+export class AppComponent {}
+
+@Component({
+  selector: 'host',
+  // the host simply renders the currentName
+  template: `{{ currentName }}`,
+})
+export class HostComponent {
+  // by default the currentName is setByTheHost
+  currentName = 'setByTheHost';
+}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective implements OnInit {
+  // ourDirective uses DI to get access to the HostComponent
+  public hostComponent = inject(HostComponent);
+
+  public ngOnInit(): void {
+    // after 3 seconds OurDirective sets the hostComponent's currentName as changedByDirective
+    setTimeout(() =&gt; {
+      this.hostComponent.currentName = 'changedByDirective';
+    }, 3000);
+  }
+}
+</code></pre>
+<p>If you want to see the code in action you can check out this <a href="https://stackblitz.com/edit/angular-ivy-n5jbb9?file=src/app/app.component.ts">Stackblitz.</a></p>
+<h3>Injecting the template</h3>
+<p>From earlier, we know that structural directives are always applied to <code>ng-template</code>s. Therefore, we can inject Angular's TemplateRef, which provides us with the necessary information to render the template to the DOM. Let's look at the code below to see the internal workings of the TemplateRef:</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `&lt;ng-template [ourDirective]&gt;I am in the template&lt;/ng-template&gt;`,
+})
+export class AppComponent {}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective implements OnInit {
+  private template = inject(TemplateRef);
+
+  public ngOnInit(): void {
+    console.log(
+      (this.template as any)._declarationTContainer.tViews.template + ''
+    );
+  }
+}
+</code></pre>
+<p>This will log the TemplateRef's instructions, which tell Angular how to generate our DOM element to the console:</p>
+<pre><code>function AppComponent_ng_template_0_Template(rf, ctx) { if (rf &amp; 1) {
+i0.ɵɵtext(0, &quot;I am in the template&quot;);
+} }
+</code></pre>
+<p><a href="https://stackblitz.com/edit/angular-ivy-brjapu?file=src/app/app.component.ts">Link to Stackblitz</a></p>
+<p>Now that we have the information on how to render our template, we need somewhere to render it. Again, Angular's dependency injection system gives us access to what we need. The <strong>ViewContainerRef</strong>.</p>
+<h3>Injecting the view container</h3>
+<p>Every Angular component or directive has access to something called the ViewContainerRef. The official documentation defines it as <em>a container where one or more views can be attached to a component.</em></p>
+<p>We can think of it as a reference to a virtual container around an anchor element. The anchor element indicates the place in the DOM where we can dynamically create new elements. The container can instantiate new elements dynamically. It will render those new elements as siblings of the anchor element.</p>
+<p>Our anchor element can be a custom element, an element node, or even a comment element. Let's take a look at the example below:</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `
+  &lt;our-component&gt;&lt;/our-component&gt;
+  &lt;div ourDirective&gt;On div&lt;/div&gt;
+  &lt;ng-template ourDirective&gt;On ng-template&lt;/ng-template&gt;
+  `,
+})
+export class AppComponent {}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective {
+  private vcr = inject(ViewContainerRef);
+
+  public ngOnInit(): void {
+    console.log(this.vcr.element.nativeElement);
+  }
+}
+
+@Component({
+  selector: 'our-component',
+  template: `&lt;div&gt;Our Component&lt;/div&gt;`,
+})
+export class OurComponent {
+  private vcr = inject(ViewContainerRef);
+
+  public ngOnInit(): void {
+    console.log(this.vcr.element.nativeElement);
+  }
+}
+</code></pre>
+<p>This produces the following results in the Stackblitz and Chrome consoles:
+<img alt="screenshot from Stackblitz, showing the custom HTMLElement, HTMLDivElement, Comment logged by our directive" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8drjm2q3q8zdccav3bv3.png" />
+We see that our ViewContainerRef's native elements are our custom element, a regular HTML <code>div</code> element, and in the case of the <code>ng-template</code>, a <code>&lt;!--container--&gt;</code> comment that Angular inserts into the HTML for any (potential) view it manages. Each time we get the DOM anchor which the ViewContainerRef can use to create new (sibling) elements.</p>
+<p>Again, I encourage you to check out the working code in the <a href="https://stackblitz.com/edit/angular-ivy-krvagm?file=src/app/app.component.ts">Stackblitz.</a></p>
+<h3>Putting the two together</h3>
+<p>Finally, we have everything we need to live up to the official definition of structural directives:</p>
+<p><em>Change the DOM layout by adding and removing DOM elements.</em></p>
+<p>Let's create a custom structural directive that renders our template to the DOM not once, but <strong>TWO</strong> times! Super exciting!</p>
+<pre><code class="language-ts">@Directive({
+  selector: '[twoTimes]',
+})
+export class TwoTimesDirective implements OnInit {
+  // get the template ref from the ng-template host
+  private template = inject(TemplateRef);
+  // get the viewcontainerref from the host: &lt;!--comment--&gt;
+  private vcr = inject(ViewContainerRef);
+
+  // on initialization of our directive, render our template to the DOM twice
+  public ngOnInit(): void {
+    this.vcr.createEmbeddedView(this.template);
+    this.vcr.createEmbeddedView(this.template);
+  }
+}
+</code></pre>
+<p>We inject both TemplateRef and ViewContainerRef into our directive. In our <code>ngOnInit</code> lifecycle hook, we create two sibling elements based on the template obtained from the directive's host.</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `
+  &lt;p *twoTimes&gt;Two times from asterisk&lt;/p&gt;
+  &lt;ng-template twoTimes&gt;&lt;p&gt;Two times from ng-template&lt;/p&gt;&lt;/ng-template&gt;
+  `,
+})
+export class AppComponent {}
+</code></pre>
+<p>To illustrate that our micro-syntax is correctly transpiled we use both alternatives in our AppComponent. The result is a total of four elements rendered to the DOM. Each component created two siblings to the <code>&lt;!--comment--&gt;</code> from the respective ViewContainerRef:</p>
+<pre><code class="language-html">
+&lt;my-app ng-version=&quot;15.0.2&quot;&gt;
+    &lt;p&gt;Two times from asterisk&lt;/p&gt;
+    &lt;p&gt;Two times from asterisk&lt;/p&gt;
+    &lt;!--container--&gt;
+
+    &lt;p&gt;Two times from ng-template&lt;/p&gt;
+    &lt;p&gt;Two times from ng-template&lt;/p&gt;
+    &lt;!--container--&gt;
+&lt;/my-app&gt;
+</code></pre>
+<p><a href="https://stackblitz.com/edit/angular-ivy-ezyipj?file=src/app/app.component.ts">Link to Stackblitz</a></p>
+<h2>Just getting started</h2>
+<p>In this article, we took the first steps to truly understanding how structural directives work. However, we have just scratched the surface. We barely even peeked under the asterisk. To be able to truly leverage the power of structural components we will need to understand how we can pass data to our template using a <strong>context</strong> object, how we can ensure <strong>strict template type checking</strong> for said context, and how the <strong>structural directive syntax</strong> is parsed.</p>
+<p>So let's pat ourselves on the back, take a quick <a href="https://www.youtube.com/watch?v=AKGrmY8OSHM">NSDR (Non Sleep Deep Rest)</a> break to let the information settle, and get excited about the next part of our journey to structural directive mastery.</p>
+    </main>
+    <footer>
+    <a href="/feedback">Ask me questions about this page or give feedback</a>
+    </footer>
+  </body>
+</html>

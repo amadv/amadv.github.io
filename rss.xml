@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+        <channel>
+        <atom:link href="https://amadv.github.io" rel="self" type="application/rss+xml" />
+        <title>Aaron Madved</title>
+        <description>Aaron Madved's blog</description>
+        <link>https://amadv.github.io/</link>
+        <lastBuildDate>Wed, 19 Feb 2025 21:40:53 -0000</lastBuildDate>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/zettelkasten_associative_thought</guid>
+            <link>https://amadv.github.com/posts/zettelkasten_associative_thought</link>
+            <pubDate>Mon, 01 Jun 2020 10:00:00 +0000</pubDate>
+            <title>Zetteklasten: associative thought</title>
+            <description><![CDATA[<p>Zettelkasten is a knowledge management system invented by Niklas Luhmann, a German sociologist.</p>
+<p>It is based on an idea that when you need to produce meaningful work, it is likely too late to start collecting input. Say, writing an article or an assignment. If you start with an idea and then try to work through sources of information as your idea develops, you put yourself under stress: it is very hard to think one step at a time in an area where you don't have expertise.</p>
+<p>So there are 2 problems:</p>
+<ul>
+<li>Procrastination and loss of interest</li>
+<li>Forming negative association with writing</li>
+</ul>
+<p>Instead, what Luhmann proposed was the idea that when you start writing, the process should be mostly editorial: there shouldn't be any active thinking or invention. You should just go over ideas, references and connections you've build up over time and combine them into a linear text.</p>
+<p>In addition to that, he noted that the only viable way to actually collect ideas is to do your work and reading under assumption that you will write about it in the end. And the process of writing will then improve connections between subjects in your brain and will help you think better and will open up a way to more advanced topics.</p>
+<p>In order to start, you need a place where you will capture raw ideas/notes, and another place where you will put ideas for permanent storage. The first one can be really anything - a pen and paper notebook will do fine, as well as digital alternatives like Evernote, OneNote or Apple Notes. The most important thing here is to not overthink the structure - just capture things as you read. The second one should be able to support links between notes, have tags and full-text search. One good example of this is Notational Velocity (if you are on a Mac).</p>
+<p>When you read something, take very brief notes of core ideas (just a few sentences in your own words), include references to original article/book and store it into your first system.</p>
+<p>Once in a while, take your time to transfer notes from your first system to the second one. Here, take time to think about what context you may use information in. Don't try to make any categories for your information - this will put unnecessary strain on your brain, produce unneeded clutter and in general won't help (you won't come up with a good taxonomy anyway). Instead, use tags such as #job, or #graduatework or things like that. Then you will be able to find your notes later with regular text search (which computers are really good at).</p>
+<p>If you have an idea, do a text search on your second system to pull all relevant knowledge about it. Use those references and recorded thoughts to feed the new idea and develop it a few steps further. Make a new note that contains the idea and link back to original notes that you used to develop it. Rinse and repeat with more high-level ideas.</p>
+<p>Above all, don't try to build any excessive structure in your knowledge base: it can kill your motivation. Computers are so powerful that they can find information in your notes instantly even if you produce dozens of pages a day, every day of your life. Think about it as an extension of your brain: it doesn't store information hierarchically, but associatively. This way they will hopefully be able to work together.</p>
+<p>Further information:</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=rOSZOCoqOo8">5 minute video explaining the method</a></li>
+<li><a href="https://fortelabs.co/blog/how-to-take-smart-notes/">An in-depth article from Fortelabs</a></li>
+</ul>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/mastering_angular_structural-directives_the_basics</guid>
+            <link>https://amadv.github.com/posts/mastering_angular_structural-directives_the_basics</link>
+            <pubDate>Fri, 20 Jan 2023 10:00:00 +0000</pubDate>
+            <title>Mastering Angular Structural Directives - The basics</title>
+            <description><![CDATA[<p>Structural directives in Angular are one of the framework’s most powerful tools. We encounter them early in our Angular journeys. They are integral to developing even the most basic Angular applications.</p>
+<p>Whether it is rendering a list of todos or toggling some icon once a todo is completed, <em>ngFor and </em>ngIf become familiar faces in the earliest days as Angular developers. From then on, they stay our trusted partners on which we frequently rely in day-to-day development tasks. However, the inner workings of these directives are often a mystery to both new and experienced developers.</p>
+<p>In this series, we will delve deeper into the internal workings of structural directives, providing a comprehensive understanding of what is going on under the asterisk. In this article, we will examine what needs to happen for a structural directive to render to the DOM.</p>
+<h2>*easyToSpot - A minimal introduction to structural directive’s micro-syntax</h2>
+<p>You probably spotted two of the built-in structural directives: NgIf and NgFor. They were easy to identify, as I followed the convention laid out directly in the Angular docs: <em>When structural directives are applied they generally are prefixed by an asterisk, *.</em> More interestingly, the docs also state that Angular uses this convention to wrap the element the directive is applied to, also known as the host element, with an <code>ng-template</code>:</p>
+<pre><code class="language-ts">&lt;div *ngIf=&quot;hero&quot;&gt;{{hero.name}}&lt;/div&gt;
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-ts">&lt;ng-template [ngIf]=&quot;hero&quot;&gt;
+  &lt;div&gt;{{hero.name}}&lt;/div&gt;
+&lt;/ng-template&gt;
+</code></pre>
+<p>Looking at this longhand version, we can identify two ways of defining structural directives:
+1. By <strong>what they do</strong> (as the official documentation does): <em>Structural directives are directives that change the DOM layout by adding and removing DOM elements.</em>
+2. By <strong>what they are</strong>: Directives that are applied to <code>ng-template</code>s and come with an optional micro syntax that makes our HTML nicer to read.</p>
+<h2>Directive superpowers - Rendering to the DOM with the help of dependency injection</h2>
+<p>Knowing that we are dealing with a directive we can take full advantage of Angular's dependency injection (DI). This allows us to access the directive's host by simply injecting it into our directive. Given that we know the host's type. The following example demonstrates this:</p>
+<pre><code class="language-ts">@Component({
+  // in our app
+  selector: 'app',
+  // ourDirective is applied to the host component
+  template: `&lt;host ourDirective &gt;&lt;/host&gt;`,
+})
+export class AppComponent {}
+
+@Component({
+  selector: 'host',
+  // the host simply renders the currentName
+  template: `{{ currentName }}`,
+})
+export class HostComponent {
+  // by default the currentName is setByTheHost
+  currentName = 'setByTheHost';
+}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective implements OnInit {
+  // ourDirective uses DI to get access to the HostComponent
+  public hostComponent = inject(HostComponent);
+
+  public ngOnInit(): void {
+    // after 3 seconds OurDirective sets the hostComponent's currentName as changedByDirective
+    setTimeout(() =&gt; {
+      this.hostComponent.currentName = 'changedByDirective';
+    }, 3000);
+  }
+}
+</code></pre>
+<p>If you want to see the code in action you can check out this <a href="https://stackblitz.com/edit/angular-ivy-n5jbb9?file=src/app/app.component.ts">Stackblitz.</a></p>
+<h3>Injecting the template</h3>
+<p>From earlier, we know that structural directives are always applied to <code>ng-template</code>s. Therefore, we can inject Angular's TemplateRef, which provides us with the necessary information to render the template to the DOM. Let's look at the code below to see the internal workings of the TemplateRef:</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `&lt;ng-template [ourDirective]&gt;I am in the template&lt;/ng-template&gt;`,
+})
+export class AppComponent {}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective implements OnInit {
+  private template = inject(TemplateRef);
+
+  public ngOnInit(): void {
+    console.log(
+      (this.template as any)._declarationTContainer.tViews.template + ''
+    );
+  }
+}
+</code></pre>
+<p>This will log the TemplateRef's instructions, which tell Angular how to generate our DOM element to the console:</p>
+<pre><code>function AppComponent_ng_template_0_Template(rf, ctx) { if (rf &amp; 1) {
+i0.ɵɵtext(0, &quot;I am in the template&quot;);
+} }
+</code></pre>
+<p><a href="https://stackblitz.com/edit/angular-ivy-brjapu?file=src/app/app.component.ts">Link to Stackblitz</a></p>
+<p>Now that we have the information on how to render our template, we need somewhere to render it. Again, Angular's dependency injection system gives us access to what we need. The <strong>ViewContainerRef</strong>.</p>
+<h3>Injecting the view container</h3>
+<p>Every Angular component or directive has access to something called the ViewContainerRef. The official documentation defines it as <em>a container where one or more views can be attached to a component.</em></p>
+<p>We can think of it as a reference to a virtual container around an anchor element. The anchor element indicates the place in the DOM where we can dynamically create new elements. The container can instantiate new elements dynamically. It will render those new elements as siblings of the anchor element.</p>
+<p>Our anchor element can be a custom element, an element node, or even a comment element. Let's take a look at the example below:</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `
+  &lt;our-component&gt;&lt;/our-component&gt;
+  &lt;div ourDirective&gt;On div&lt;/div&gt;
+  &lt;ng-template ourDirective&gt;On ng-template&lt;/ng-template&gt;
+  `,
+})
+export class AppComponent {}
+
+@Directive({
+  selector: '[ourDirective]',
+})
+export class OurDirective {
+  private vcr = inject(ViewContainerRef);
+
+  public ngOnInit(): void {
+    console.log(this.vcr.element.nativeElement);
+  }
+}
+
+@Component({
+  selector: 'our-component',
+  template: `&lt;div&gt;Our Component&lt;/div&gt;`,
+})
+export class OurComponent {
+  private vcr = inject(ViewContainerRef);
+
+  public ngOnInit(): void {
+    console.log(this.vcr.element.nativeElement);
+  }
+}
+</code></pre>
+<p>This produces the following results in the Stackblitz and Chrome consoles:
+<img alt="screenshot from Stackblitz, showing the custom HTMLElement, HTMLDivElement, Comment logged by our directive" src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8drjm2q3q8zdccav3bv3.png" />
+We see that our ViewContainerRef's native elements are our custom element, a regular HTML <code>div</code> element, and in the case of the <code>ng-template</code>, a <code>&lt;!--container--&gt;</code> comment that Angular inserts into the HTML for any (potential) view it manages. Each time we get the DOM anchor which the ViewContainerRef can use to create new (sibling) elements.</p>
+<p>Again, I encourage you to check out the working code in the <a href="https://stackblitz.com/edit/angular-ivy-krvagm?file=src/app/app.component.ts">Stackblitz.</a></p>
+<h3>Putting the two together</h3>
+<p>Finally, we have everything we need to live up to the official definition of structural directives:</p>
+<p><em>Change the DOM layout by adding and removing DOM elements.</em></p>
+<p>Let's create a custom structural directive that renders our template to the DOM not once, but <strong>TWO</strong> times! Super exciting!</p>
+<pre><code class="language-ts">@Directive({
+  selector: '[twoTimes]',
+})
+export class TwoTimesDirective implements OnInit {
+  // get the template ref from the ng-template host
+  private template = inject(TemplateRef);
+  // get the viewcontainerref from the host: &lt;!--comment--&gt;
+  private vcr = inject(ViewContainerRef);
+
+  // on initialization of our directive, render our template to the DOM twice
+  public ngOnInit(): void {
+    this.vcr.createEmbeddedView(this.template);
+    this.vcr.createEmbeddedView(this.template);
+  }
+}
+</code></pre>
+<p>We inject both TemplateRef and ViewContainerRef into our directive. In our <code>ngOnInit</code> lifecycle hook, we create two sibling elements based on the template obtained from the directive's host.</p>
+<pre><code class="language-ts">@Component({
+  selector: 'my-app',
+  template: `
+  &lt;p *twoTimes&gt;Two times from asterisk&lt;/p&gt;
+  &lt;ng-template twoTimes&gt;&lt;p&gt;Two times from ng-template&lt;/p&gt;&lt;/ng-template&gt;
+  `,
+})
+export class AppComponent {}
+</code></pre>
+<p>To illustrate that our micro-syntax is correctly transpiled we use both alternatives in our AppComponent. The result is a total of four elements rendered to the DOM. Each component created two siblings to the <code>&lt;!--comment--&gt;</code> from the respective ViewContainerRef:</p>
+<pre><code class="language-html">
+&lt;my-app ng-version=&quot;15.0.2&quot;&gt;
+    &lt;p&gt;Two times from asterisk&lt;/p&gt;
+    &lt;p&gt;Two times from asterisk&lt;/p&gt;
+    &lt;!--container--&gt;
+
+    &lt;p&gt;Two times from ng-template&lt;/p&gt;
+    &lt;p&gt;Two times from ng-template&lt;/p&gt;
+    &lt;!--container--&gt;
+&lt;/my-app&gt;
+</code></pre>
+<p><a href="https://stackblitz.com/edit/angular-ivy-ezyipj?file=src/app/app.component.ts">Link to Stackblitz</a></p>
+<h2>Just getting started</h2>
+<p>In this article, we took the first steps to truly understanding how structural directives work. However, we have just scratched the surface. We barely even peeked under the asterisk. To be able to truly leverage the power of structural components we will need to understand how we can pass data to our template using a <strong>context</strong> object, how we can ensure <strong>strict template type checking</strong> for said context, and how the <strong>structural directive syntax</strong> is parsed.</p>
+<p>So let's pat ourselves on the back, take a quick <a href="https://www.youtube.com/watch?v=AKGrmY8OSHM">NSDR (Non Sleep Deep Rest)</a> break to let the information settle, and get excited about the next part of our journey to structural directive mastery.</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/gitea_docker</guid>
+            <link>https://amadv.github.com/posts/gitea_docker</link>
+            <pubDate>Wed, 25 Jan 2023 10:00:00 +0000</pubDate>
+            <title>Using Gitea as Your Docker Hub</title>
+            <description><![CDATA[<p>I have a bit of an unconventional way to deploy docker containers - I saw that Docker Hub wanted to charge montly fees when I am simply pushing and pulling images infrequently, so I decided to do this via my Gitea instance.</p>
+<p>Create your Dockerfile in your project to properly deploy the app.</p>
+<pre><code>docker build -t app-name .
+</code></pre>
+<p>login to Docker and push the image:</p>
+<pre><code>docker login git.yoursite.com
+docker tag app-name:latest git.yoursite.com/username/app-name:latest
+docker push git.yoursite.com/username/app-name:latest
+</code></pre>
+<p>On your server:</p>
+<pre><code>docker pull git.yoursite.com/username/app-name:latest
+docker run -d --name app-name -p 42069:42069 git.yoursite.com/username/app-name:latest
+</code></pre>
+<p>From there, you can configure nginx as a reverse proxy to the port you chose to run the app, set up a domain and your ssl certs, and you are off to the races.</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/mirror</guid>
+            <link>https://amadv.github.com/posts/mirror</link>
+            <pubDate>Wed, 15 Feb 2023 10:00:00 +0000</pubDate>
+            <title>The Universe is a mirror</title>
+            <description><![CDATA[<p>Change your perception, change your life. The World is a Mirror of your inner self.</p>
+<p>Your life is a reflection of your inner consciousness: whether you view things positively or negatively directly impacts upon your internalization of the place in which you live, the people you associate with and cross paths with, your efforts, your successes, your failures - everything. The Universe conspires to give you exactly what you need, what you ask for subconsciously. What if you asked consciously?</p>
+<p>I know that this sounds as if it is ‘New Age’ or ‘woo-woo’.</p>
+<p>However, with more knowledge of the nature of consciousness, with progressions in theoretical and quantum physics, the truth is becoming that you are an active observer of the Universe. You are the maker, the Creator. Some would say that you are God. The Theory of Everything will tie all states of matter, non-matter, consciousness, and God together - of this I am fully, undoubtedly convinced.</p>
+<p>It is a direct affront to the materialist worldview of the Universe - I have dropped all of these sentiments in favour of Metaphysical Idealism.</p>
+<p>The energy in which you put out into the Universe comes back.</p>
+<p>If you are constantly looking for the positive side of things, you will get the positive. If you see the darkness, you will get the darkness. Things will conspire to help you or hinder you based upon your level of consciousness and your outlook on all things, all people - everything - around you.</p>
+<p>Begin to see all as yourself, and you will be on the path.</p>
+<p>I want you to try a simple experiment: When you are out and about, look people in the eyes as if they are yourself. Look at everyone as if they are just a part of your very being. Come back to me with the results - I bet you will be blown away at the ‘knowing’ smiles you get, the deep eye contact, the love that you will feel deep in your heart.</p>
+<p>Personally, this practice has been completely life altering.</p>
+<p>Things just ‘Are’. You are the One that places meaning on the happenings.</p>
+<p>All energy is neither created nor destroyed, it simply changes from one form or energy to another.</p>
+<p>Therefore, there is no ‘Good’ or ‘Bad’ - there just Is. From there, you define all that occurs with labels that have been programmed into you since your birth. As a father, it is paramount that I am cognizant of the level of power I hold in shaping the worldview of my child. I can be a catalyst in pushing her to believe she is entirely capable of anything, or the roadblock in her way. From a young age, my parents instilled a sense of leadership, a sense of possibility - it has helped to shape me into a man that you are reading the words of on this very page. I do not discount other environmental factors, but parents can create worldviews that have lasting impact.</p>
+<p>Your parents, your teachers, your friends, everyone - have built a sphere around you that places these definitions on all of your life. You unconsciously attribute the previous experiences that you have had onto every event, circumstance, and challenge that you encounter.</p>
+<p>I look back at my life. In my earlier adulthood, I had a tremendously positive outlook on the world around me.</p>
+<p>I remember I could see everyone’s potential, I was focused on improvement, on the things that I could control. The world around me reflected this intention, this positivity. The people in my life did, too. It was as if all those that I met conspired to help me, to light my fire.</p>
+<p>For a few years in my mid 20’s I saw myself go down the negative path.</p>
+<p>I saw people in a darker light. I felt the bad in the world - whether that be from reading the news, or from frequenting places in which my viewpoint was shifted about women, or society, or the ‘stupidity’ of people. My life was not better for this - it made everything around me feel darker. The thing is that I believe the vast majority of people view life in this regard. They may have been positive and happy people at one point, but they became jaded. They have a learned sense of despair. 2020 for many people was a catapult into this darker world.</p>
+<p>Talk to anyone - you will within a minute understand their outlook on this life. You need even not talk to most people - the story is in their eyes. A person’s outlook on life is in their eyes.</p>
+<p>The difficulty is in coming back; In moving from the darkness to the light. Many people never shift away from the dark - they revel in it, they desire the worst for others instead of the best. They view everything as ‘happening to them’ rather than ‘happening FOR them’. They believe there is no control. That they are a leaf in the wind. A person that is not destined to do the things that matter. And, they would be correct, for the Universe is a reflection of our inner thoughts, feelings, and level of consciousness.</p>
+<p>However - we are all meant to shift the Universe. Each and every single one of us is meant to leave a mark, in our own way, on those we meet, on the things that are within our control. How much power is in that sentiment?</p>
+<p>I began working toward the positive once more. It took a few years, but I feel as if I am on the presipice once again, a life that I am absolutely grateful, lit on fire everyday. A belief I deeply hold is that we can truly live in bliss if we so choose. Take a gram or two of psilocybin: that feeling is replicable every minute of your life. Aim for that target. Let it be your compass.</p>
+<p>Imagine what your life could be if you were passionate about life. Imagine what you would do if your believed you could not fail. Imagine what could be accomplished in dozens of lifetimes. All of this is possible when you come to grips with who you are. When you understand that the world is a mirror.</p>
+<p>What does your reflection look like?</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/future_friend</guid>
+            <link>https://amadv.github.com/posts/future_friend</link>
+            <pubDate>Mon, 12 Jun 2023 10:00:00 +0000</pubDate>
+            <title>Make friends with the future you</title>
+            <description><![CDATA[<p>When you look around, you are looking at a series of decisions that you have made over the course of your life.</p>
+<h2>Do you like what you see?</h2>
+<p>The place that you live, the car that you drive, your physical appearance, how much money you have in your account; they all are a direct tie to the decisions you have made months, years, or perhaps even decades ago.</p>
+<p>That’s unbelievably powerful.</p>
+<p>When you make a decision in the here and now, you have to look at how it will impact Future You. You have to understand that all we have is this moment, but the choices that we make in this moment will impact our future moments.</p>
+<p>So, when you decide to eat junk food, think about what Future You would say.</p>
+<p>When you spend frivolously on things that you don’t actually need, what would Future You say?</p>
+<p>What would Future You say about the casual hookups that destroy the soul? What would Future You say about the skipping out on a workout? What would Future You say about not taking time to learn that skill? What would Future You say about not saying hello to that person that might be able to help you? What would Future You say about procrastinating?</p>
+<h3>Because one day, you will meet him.</h3>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/the_baseline</guid>
+            <link>https://amadv.github.com/posts/the_baseline</link>
+            <pubDate>Mon, 15 Jan 2024 10:00:00 +0000</pubDate>
+            <title>The baseline</title>
+            <description><![CDATA[<p>There is a baseline that you should strive for. An <strong>everyday, non-negotiable, automatically programmed baseline.</strong></p>
+<p>It should look something like this:</p>
+<p><strong>Get sweat</strong> coming out of your pores.</p>
+<p><strong>Eat nothing that your ancestors would not eat.</strong></p>
+<p>Get cold water on you. Feel the dread, the flinch - and do it anyway.</p>
+<p><strong>Spend time inside of yourself</strong>. And outside of yourself.</p>
+<p>Pick three needle-moving goals. <strong>Accomplish them.</strong></p>
+<p>Spend next to no time consuming. Spend the vast majority <strong>creating, building, seeking, learning, growing.</strong></p>
+<p>Tidy your space for a few minutes. Consistency births more than a sprint.</p>
+<p><strong>Challenge yourself.</strong></p>
+<p>Spend time with people that make you feel complete.</p>
+<p>Do nothing that you would hate yourself for. <strong>Do not give into vice.</strong></p>
+<p>Sleep well knowing you <strong>did all the right things.</strong></p>
+<p>Get up, and do it again tomorrow.</p>
+<p>This is the bare minimum.</p>
+<p><strong>This is your new baseline.</strong></p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/inputs</guid>
+            <link>https://amadv.github.com/posts/inputs</link>
+            <pubDate>Wed, 10 Apr 2024 10:00:00 +0000</pubDate>
+            <title>Curate your inputs - they make you who you are</title>
+            <description><![CDATA[<p>As a programmer, I look at how inputs affect outputs. Sometimes an output is known, but must work backwards to find the input.</p>
+<p>If you know the output you want in your life - a certain career, net worth, significant other, location in which you reside - you need to select the inputs that will get you to that destination.</p>
+<p>Work backwards to get to where you want to go.</p>
+<p>You can whittle down much of your life to the things that you allow to influence you, your inputs.</p>
+<p>You become the average of the 5 people you spend the most time with. You become the podcasts you listen to, the media you consume, the shows you watch, the music you listen to. You become the city in which you live, the Sunlight you take in, the nature you do or do not participate in.</p>
+<h2>Mornings should be without input</h2>
+<p>In the morning, do not allow inputs.</p>
+<p>Most people start their days by reading the news, listening to podcasts, catching up on social media, whatever.</p>
+<p>The biggest change in your mood will come when you cease this activity altogether and focus on outputting first thing. You need to stop allowing just anything to come into your headspace and dictate the day that you are moving forward into.</p>
+<p>I don’t allow outside forces that aren’t within my control to dictate the trajectory of my day. I will only read things that I know are positive, or something that will make me a better, more well-rounded person. I do not have my phone on for a few hours to begin the day, I don’t want to be dragged one way or another when I know it won’t aid me in getting closer to the place I want to go.</p>
+<p>In the evening, that is when I allow myself inputs that I cannot control. That being said, I am still careful to curate them. I don’t want negative energies in my life. So, if a movie or a podcast or something I am consuming has a negative overtone, I shut it off. I am very particular about guarding my energy.</p>
+<p>You can curate the people that you follow: on Twitter, I am careful to only follow people that I find inspirational or people that are saying valuable things that resonate with me. I regularly unfollow people if they get into a negative content pattern or they no longer serve my higher purpose.</p>
+<p>Be highly cognizant of the things that you put into your body and mind. Because you become them; energy is not created or destroyed.</p>
+<p>Until next time.</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/programmer_death</guid>
+            <link>https://amadv.github.com/posts/programmer_death</link>
+            <pubDate>Wed, 05 Jun 2024 10:00:00 +0000</pubDate>
+            <title>A Daily Programmer Schedule for Pain-free Work</title>
+            <description><![CDATA[<p>The more that I use a computer, the more that I realize that using a computer all of the time is one of the worst things you can possibly do for your body.</p>
+<p>Consequently, the more that your body deteriorates from using a computer, the less effective your mind you will be, too. All is interconnected.</p>
+<p>In order to actually produce at your best, and create the things that you wish to create, you need to be doing the things that allow you to spend less time in front of a screen.</p>
+<p>When you get there, you sprint. You do what you intend to do, get in, then you get out. Mercenary style.</p>
+<p>You should be using your keyboard to kill. To get the idea and the work out there. Then, you can rest like a lion after the hunt.</p>
+<p>What this means is that you no longer can use a screen to entertain yourself. You need to find other ways to entertain yourself (read a book or go outside).</p>
+<p>No longer should you be doing anything on your computer that is not creative. Nothing should be done on a screen that is not moving the ball down the field. Otherwise, you will associate a computer with consuming rather than producing.</p>
+<p>And, who is to say that your work cannot be fun?</p>
+<p>Producing is one of the most enjoyable activities we can partake in, we have just forgotten it.</p>
+<p>Every press of the key is getting me closer to the goal. Every line I write is changing the world. Nothing else matters. No news sites, no social media, no forums, no youtube, nothing.</p>
+<p>Put a paintbrush in the hand of a real artist, and all he will want to do is paint.</p>
+<p>Here is my schedule on the daily to produce more and spend less time in front of the screen.</p>
+<h1>Schedule</h1>
+<p>5:00 - 6:30:
+    Meditate
+    Body weight, nervous system programming, stretching
+    Drink One litre of water
+    Change, shower, groom, get dressed</p>
+<p>6:30 - 10:30: Work block One
+    Get up from the chair every 30 minutes, stand for 30 minutes and sit. I set a timer, and every time it goes off, I do some sort of bodyweight exercise as a break.</p>
+<h2>I am joking ... lol</h2>
+<p>Lets be real most of us don't have time or the spunk to keep up a crazy 6am workout routine.
+I like my whiskeys at night, and stay up well past a reasonable hour. Instead the tips that I will share below should act more as suggested guidelines. Adjust accordingly to your schedule where ever you are in life.</p>
+<h3>Tips</h3>
+<ul>
+<li>Get up every 30 minutes, or change your posture</li>
+<li>Kneel on the floor, use a saddle chair, sit in lotus, etc.</li>
+<li>Dont fall into the trap of buying ergonomic tech gear, actions work better</li>
+<li>Every 3-4 hours, do a workout where you are 15 minutes removed from the screen</li>
+<li>Walk more (aim for at least once per day if not a couple walks outside)</li>
+<li>Lift more weights, hang from a tree or pullup bar if you have one</li>
+<li>Drink only water and tea while working</li>
+<li>Coffee in morning, none after 11am</li>
+<li>6 days work per week out doesn't matter where, 1 day off of active rest</li>
+</ul>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/simple_cicd</guid>
+            <link>https://amadv.github.com/posts/simple_cicd</link>
+            <pubDate>Tue, 22 Oct 2024 10:00:00 +0000</pubDate>
+            <title>How I Deploy my apps with one command</title>
+            <description><![CDATA[<p>Instead of using actions or some other way of CI/CD’ing my apps, I simply work with a deploy script that will build a Docker Container, push it to my registry, SSH into the remote, pull the container, make sure it runs, then apply NGINX configurations and SSL certificates so that the app is live on the internet for all to see.</p>
+<p>This means I don’t need any CI/CD additions generally, and I can create Dockefiles or Docker-composes for the purpose of each apps deployment. Easy.</p>
+<p>It’s how I publish blog posts, deploy my apps, and get things out there as fast as possible.</p>
+<p>Steal the script and go from there:</p>
+<pre><code>#!/bin/bash
+
+# Check the number of arguments
+if [ &quot;$#&quot; -ne 3 ]; then
+echo &quot;Usage: $0 &lt;image_name&gt; &lt;port_mapping&gt; &lt;domain&gt;&quot;
+exit 1
+fi
+
+# Assign arguments to variables
+IMAGE_NAME=$1
+PORT_MAPPING=$2
+DOMAIN=$3
+EMAIL=&quot;&quot;
+TAG=&quot;latest&quot;  # Adjust tagging strategy as needed
+DOCKER_REGISTRY=&quot;&quot;  # Docker registry URL
+SERVER_HOST=&quot;&quot;
+SSH_USER=&quot;&quot;  # SSH user on the remote server
+SSH_KEY_PATH=&quot;&quot;  # SSH private key path
+
+# Extract host port from PORT_MAPPING
+HOST_PORT=$(echo $PORT_MAPPING | cut -d':' -f1)
+
+# Build the Docker image with Buildx
+docker buildx build --platform linux/amd64 -t $DOCKER_REGISTRY/&quot;$IMAGE_NAME&quot;:$TAG --load .
+
+# Push the Docker image
+docker push $DOCKER_REGISTRY/$IMAGE_NAME:$TAG
+
+# SSH into server to pull the image, restart the container, and configure NGINX and Certbot
+ssh -i $SSH_KEY_PATH $SSH_USER@$SERVER_HOST &lt;&lt; EOF
+# Pull the latest Docker image
+docker pull $DOCKER_REGISTRY/$IMAGE_NAME:$TAG
+
+# Stop and remove the existing container if it exists
+docker stop $IMAGE_NAME || true
+docker rm $IMAGE_NAME || true
+
+# Run the new container in the background with the specified port mapping
+docker run -d --name $IMAGE_NAME -p $PORT_MAPPING $DOCKER_REGISTRY/$IMAGE_NAME:$TAG
+
+# Check if NGINX config exists, if not, create it
+NGINX_CONFIG=&quot;/etc/nginx/sites-available/$DOMAIN.conf&quot;
+NGINX_ENABLED=&quot;/etc/nginx/sites-enabled/$DOMAIN.conf&quot;
+
+if [ ! -f &quot;\$NGINX_CONFIG&quot; ]; then
+    sudo bash -c &quot;cat &gt; \$NGINX_CONFIG&quot; &lt;&lt; 'ENDOFFILE'
+server {
+    listen 80;
+    server_name $DOMAIN;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        return 301 https://\$host\$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name $DOMAIN;
+
+    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
+
+    location / {
+        proxy_pass http://localhost:$HOST_PORT;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+ENDOFFILE
+
+    sudo ln -s &quot;\$NGINX_CONFIG&quot; &quot;\$NGINX_ENABLED&quot;
+fi
+
+# Reload NGINX to apply configuration
+sudo nginx -t &amp;&amp; sudo systemctl reload nginx
+
+# After NGINX is reloaded:
+sudo certbot certonly --webroot -w /var/www/certbot -d $DOMAIN --email $EMAIL --agree-tos --non-interactive --deploy-hook &quot;sudo systemctl reload nginx&quot;
+
+# Reload NGINX to use new SSL certificate
+sudo systemctl reload nginx
+EOF
+
+echo &quot;Deployment complete.&quot;
+</code></pre>
+<p>You can then use</p>
+<p><code>deploy app-name "port:port" appdomain.com</code></p>
+<p>and the docker container will build, push to your registry, pull down to your server, and deploy itself to a domain of your choosing.</p>
+<p>Nice.</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/batch_edit_files_with_ed</guid>
+            <link>https://amadv.github.com/posts/batch_edit_files_with_ed</link>
+            <pubDate>Sun, 09 Feb 2025 10:00:00 +0000</pubDate>
+            <title>Batch edit with ed</title>
+            <description><![CDATA[<p>The other day at work I needed to edit 200 files at once across dozens of repos. I wanted to do something pretty simple: basically, I had files that looked like this:</p>
+<pre><code>foo:
+  - bar
+  - baz
+  - bananas
+</code></pre>
+<p>and I wanted to insert an extra line after the <code>baz</code> line that said <code>elephant</code></p>
+<pre><code>foo:
+  - bar
+  - baz
+  - elephant
+  - bananas
+</code></pre>
+<p>I had one extra weird requirement which was that some of the lines were indented with 2 spaces, and some with 4 spaces. The <code>- elephant</code> line needed to have the same indentation as the previous line.</p>
+<p>I didn’t feel like writing a program to do this (perl would be perfect, but I don’t really remember perl at all), so I wanted to use a command line tool! A vim macro could do it, but how do you save a vim macro to a file again? I forget! I couldn’t think of how to do it with sed at the time, though in retrospect you could do something like <code>s/(.+)- baz/\1- baz\n\1- elephant</code>.</p>
+<p>In a surprising turn of events, I ended up using the <code>ed</code> editor to do this task, and it was really easy and simple to do! In this blog post I’ll make the case that if you have something you might normally accomplish with a Vim macro, you might conceivably want to use Ed for it!</p>
+<h3><a href="#what-s-ed">what’s ’ed'?</a></h3>
+<p><code>ed</code> is this sort of terrifying text editor. A typical interaction with <code>ed</code> for me in the past has gone something like this:</p>
+<pre><code>$ ed
+help
+?
+h
+?
+asdfasdfasdfsadf
+?
+&lt;close terminal in frustration&gt;
+</code></pre>
+<p>Basically if you do something wrong, ed will just print out a single, unhelpful, <code>?</code>. So I’d basically dismissed <code>ed</code> as an old arcane Unix tool that had no practical use today.</p>
+<p><code>vi</code> is a successor to <code>ed</code>, except with a visual interface instead of this <code>?</code></p>
+<h3><a href="#surprise-ed-is-actually-sort-of-cool-and-fun">surprise: Ed is actually sort of cool and fun</a></h3>
+<p>So if Ed is a terrifying thing that only prints <code>?</code> at you, why am I writing a blog post about it? WELL!!!!</p>
+<p>On April 1 this year, Michael W Lucas published a new short book called <a href="https://www.michaelwlucas.com/tools/ed">Ed Mastery</a>. I like his writing, and even though it was sort of an april fool’s joke, it was ALSO a legitimate actual real book, and so I bought it and read it to see if his claims that Ed is actually interesting were true.</p>
+<p>And it was so cool!!!! I found out:</p>
+<ul>
+<li>how to get Ed to give you better error messages than just <code>?</code></li>
+<li>that the name of the <code>grep</code> command comes from ed syntax (<code>g/re/p</code>)</li>
+<li>the basics of how to navigate and edit files using ed</li>
+</ul>
+<p>All of that was a cool Unix history lesson, but did not make me want to actually use Ed in real life. But!!!</p>
+<p>The other neat thing about Ed (that did make me want to use it!) is that any Ed session corresponds to a script that you can replay! So if I know Ed, then I can use Ed basically as a way to easily apply vim-macro-like programs to my files.</p>
+<h3><a href="#how-i-solved-my-problem-with-ed">how I solved my problem with ed</a></h3>
+<p>So! we have a file like this:</p>
+<pre><code>foo:
+  - bar
+  - baz
+  - bananas
+</code></pre>
+<p>and we want to add a line after <code>- baz</code> that says <code>- elephant</code>. Let’s do it!!</p>
+<p>With Vim, I’d do it by:</p>
+<ol>
+<li>search for <code>baz</code></li>
+<li>copy that line and paste it</li>
+<li><code>s/baz/elephant</code></li>
+<li>save &amp; quit</li>
+</ol>
+<p>We can translate that into an Ed script in a really pretty straightforward way!!</p>
+<pre><code>/baz                 # search for `baz`
+.t.                  # copy that line and paste it on the next line
+s/baz/elephants      # on the second, pasted, line replace `baz` with `elephants`
+w                    # save
+q                    # quit
+</code></pre>
+<p>ed doesn’t actually have comments, so if you wanted to actually run this ed script you’ll have to remove the <code>#</code> things</p>
+<p>Most of this is very similar to what you’d do in Vim – the <code>.t.</code> part of this is the most inscrutable bit, but I figured it out through some judicious use of Stack Overflow.</p>
+<h3><a href="#using-the-ed-script">using the ed script</a></h3>
+<p>Applying the ed script to the file I want to edit is easy! Here’s how;</p>
+<pre><code>cat my-script.ed | ed file-to-edit.txt
+</code></pre>
+<p>(or you could write <code>ed file-to-edit.txt &lt; my-script.ed</code>, but I always use cat and pipe in practice :) )</p>
+<h3><a href="#ed-is-at-least-a-little-bit-useful">Ed is at least a little bit useful!!!!</a></h3>
+<p>It was super surprising and delightful to me to find a practical use for Ed! To me the most compelling thing about Ed is that I use simple Vim macros a lot, and it’s a pretty direct way to translate a Vim macro into a way to batch edit a bunch of files.</p>
+<p>I’m definitely not going to go telling everyone they should be using ed (it’s certainly not very user friendly!), but I think it’s neat. If you’re interested, I’d really recommend buying <a href="https://www.michaelwlucas.com/tools/ed">Ed Mastery</a> – it’s quite short, I learned some neat Unix history from it, and now I have a new tool to use very occasionally!!</p>]]></description>
+            </item>
+        
+        </channel></rss>
