@@ -5,7 +5,7 @@ It is written mostly in bash, and uses [markdown.awk from knazarov](https://git.
 markdown posts and pages to HTML.
 
 The site has very minimal CSS (about 110 lines) that should be enough to display fine in most browsers
-including mobile.
+including mobile..
 
 I don't intend the code to be easily readable, but given that it's not much, you can probably figure
 things out.
