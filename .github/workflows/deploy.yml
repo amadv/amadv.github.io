@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Write access to push to the repository
 
     steps:
       - name: Checkout Repository
@@ -27,12 +29,17 @@ jobs:
       - name: Generate Site
         run: |
           source venv/bin/activate
-          python gen.py docs
+          python gen.py docs  # Keep generating the site in the `docs/` folder
+
+      - name: Add .nojekyll to avoid Jekyll processing
+        run: |
+          touch docs/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: main
-          folder: docs
-          clean: true  # Removes old files
+          branch: gh-pages  # Deploy to the `gh-pages` branch
+          folder: docs   # Deploy the entire `docs` folder, which contains your generated files
+          clean: true    # Clean the folder before deployment
+          commit-message: "Deploy generated site to GitHub Pages"
 
