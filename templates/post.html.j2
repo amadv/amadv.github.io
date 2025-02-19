@@ -1,0 +1,13 @@
+{% extends "base.html.j2" %}
+
+{%- block meta -%}
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{title}}">
+    <meta name="author" content="Konstantin Nazarov">
+    <meta property="article:published_time" content="DATE"/>
+{%- endblock -%}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}<h1>{{title}}</h1>
+{{ content }}{% endblock %}
