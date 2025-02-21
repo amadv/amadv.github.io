@@ -5,33 +5,7 @@
         <title>Aaron Madved</title>
         <description>Aaron Madved's blog</description>
         <link>https://amadv.github.io/</link>
-        <lastBuildDate>Wed, 19 Feb 2025 21:50:25 -0000</lastBuildDate>
-        
-            <item>
-            <guid>https://amadv.github.com/posts/zettelkasten_associative_thought</guid>
-            <link>https://amadv.github.com/posts/zettelkasten_associative_thought</link>
-            <pubDate>Mon, 01 Jun 2020 10:00:00 +0000</pubDate>
-            <title>Zetteklasten: associative thought</title>
-            <description><![CDATA[<p>Zettelkasten is a knowledge management system invented by Niklas Luhmann, a German sociologist.</p>
-<p>It is based on an idea that when you need to produce meaningful work, it is likely too late to start collecting input. Say, writing an article or an assignment. If you start with an idea and then try to work through sources of information as your idea develops, you put yourself under stress: it is very hard to think one step at a time in an area where you don't have expertise.</p>
-<p>So there are 2 problems:</p>
-<ul>
-<li>Procrastination and loss of interest</li>
-<li>Forming negative association with writing</li>
-</ul>
-<p>Instead, what Luhmann proposed was the idea that when you start writing, the process should be mostly editorial: there shouldn't be any active thinking or invention. You should just go over ideas, references and connections you've build up over time and combine them into a linear text.</p>
-<p>In addition to that, he noted that the only viable way to actually collect ideas is to do your work and reading under assumption that you will write about it in the end. And the process of writing will then improve connections between subjects in your brain and will help you think better and will open up a way to more advanced topics.</p>
-<p>In order to start, you need a place where you will capture raw ideas/notes, and another place where you will put ideas for permanent storage. The first one can be really anything - a pen and paper notebook will do fine, as well as digital alternatives like Evernote, OneNote or Apple Notes. The most important thing here is to not overthink the structure - just capture things as you read. The second one should be able to support links between notes, have tags and full-text search. One good example of this is Notational Velocity (if you are on a Mac).</p>
-<p>When you read something, take very brief notes of core ideas (just a few sentences in your own words), include references to original article/book and store it into your first system.</p>
-<p>Once in a while, take your time to transfer notes from your first system to the second one. Here, take time to think about what context you may use information in. Don't try to make any categories for your information - this will put unnecessary strain on your brain, produce unneeded clutter and in general won't help (you won't come up with a good taxonomy anyway). Instead, use tags such as #job, or #graduatework or things like that. Then you will be able to find your notes later with regular text search (which computers are really good at).</p>
-<p>If you have an idea, do a text search on your second system to pull all relevant knowledge about it. Use those references and recorded thoughts to feed the new idea and develop it a few steps further. Make a new note that contains the idea and link back to original notes that you used to develop it. Rinse and repeat with more high-level ideas.</p>
-<p>Above all, don't try to build any excessive structure in your knowledge base: it can kill your motivation. Computers are so powerful that they can find information in your notes instantly even if you produce dozens of pages a day, every day of your life. Think about it as an extension of your brain: it doesn't store information hierarchically, but associatively. This way they will hopefully be able to work together.</p>
-<p>Further information:</p>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=rOSZOCoqOo8">5 minute video explaining the method</a></li>
-<li><a href="https://fortelabs.co/blog/how-to-take-smart-notes/">An in-depth article from Fortelabs</a></li>
-</ul>]]></description>
-            </item>
+        <lastBuildDate>Fri, 21 Feb 2025 18:13:08 -0000</lastBuildDate>
         
             <item>
             <guid>https://amadv.github.com/posts/mastering_angular_structural-directives_the_basics</guid>
@@ -543,6 +517,38 @@ q                    # quit
 <h3><a href="#ed-is-at-least-a-little-bit-useful">Ed is at least a little bit useful!!!!</a></h3>
 <p>It was super surprising and delightful to me to find a practical use for Ed! To me the most compelling thing about Ed is that I use simple Vim macros a lot, and it’s a pretty direct way to translate a Vim macro into a way to batch edit a bunch of files.</p>
 <p>I’m definitely not going to go telling everyone they should be using ed (it’s certainly not very user friendly!), but I think it’s neat. If you’re interested, I’d really recommend buying <a href="https://www.michaelwlucas.com/tools/ed">Ed Mastery</a> – it’s quite short, I learned some neat Unix history from it, and now I have a new tool to use very occasionally!!</p>]]></description>
+            </item>
+        
+            <item>
+            <guid>https://amadv.github.com/posts/many_of_my_projects_are_dirty_hacks</guid>
+            <link>https://amadv.github.com/posts/many_of_my_projects_are_dirty_hacks</link>
+            <pubDate>Tue, 25 Feb 2025 02:30:00 +0000</pubDate>
+            <title>Many of my projects are dirty hacks</title>
+            <description><![CDATA[<p>Over the last 20 years that I've been writing software, my ability to deliver projects has increased.
+I especially notice this in context of pet projects, that I not only finish, but also continue using over time.</p>
+<p>You may say that this is just the accumulated experience, and I'll grant you that. But I believe that mostly
+the quality of code that I write didn't become significantly better, and neither did the speed with which
+I produce code.</p>
+<p>Alright, if not speed or quality - then what?</p>
+<p>My best guess so far would be the understanding of time boundaries. If 10 years ago someone had shown me a big
+problem - I'll just roll up the sleeves and start working on it from the level of modules, unit testing everything
+and making sure my implementation is well-designed.</p>
+<p>Now, I understand very clearly that by the time I'm done with writing out the system properly - not only my
+energy will run out, but also all motivation will evaporate. So I make a deliberate decision to start with a
+dirtiest and cheapest version of what I need. Oftentimes, it turns out that a prototype is just enough to
+get by through a long stretch of time.</p>
+<p>The second thing I would do is try to not aim at a moving target. The more stable and "fossilized" the technology -
+the better. It is ideal if I can get back to the project after 5 years, and it just compiles and works.</p>
+<p>Even though I allow myself to write crappy code, there is one rule: don't let the crap leak through layers.
+If the crap stays put in its own layer - you can always reason about it, and change it when the time comes.
+This often means that layers would only exchange "plain-old flat data structures" without any class hierarchies,
+as if they were interacting through the network (just at the level of one process).</p>
+<p>And the last thing -- I try to make it dead simple to pick up the work from where I left it, and continue.
+If the cost of context recovery is low enough for me - it means that the project is more likely to gain
+a fraction of my time.</p>
+<p>If you're new in your career - don't take anything from this post as an advice. I don't believe it would
+be helpful, and blindly following it would probably lead to a disaster. Except probably for one thing:
+do prototypes.</p>]]></description>
             </item>
         
         </channel></rss>
