@@ -10,6 +10,12 @@ including mobile..
 I don't intend the code to be easily readable, but given that it's not much, you can probably figure
 things out.
 
+## Setup
+* `python -m venv venv`
+* `source ./venv/bin/activate`
+* `pip install -r requirements.txt`
+* `python gen.py`
+
 ## Building
 
 If you're on any Linux system, you can just type `make` in your terminal, and the result will be in the
