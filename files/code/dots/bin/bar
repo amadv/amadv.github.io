@@ -1,0 +1,55 @@
+#!/usr/pkg/bin/bash
+
+#         -g 514x20+427+671 \
+
+bat() {
+	getbat=$(envstat | grep % | awk '{print $6}' | tr -d '()' | tail -1 | cut -b 1,2,6)
+	echo $getbat
+}
+
+getdate() {
+        datetime=$(date +"%Y.%m.%d")
+        echo $datetime
+}
+
+gettime() {
+	getclock=$(date +"%H:%M")
+	echo $getclock
+}
+
+temp(){
+        coretemp=$(envstat | grep "cpu0 temperature: " \
+        | awk '{print $3}' | tr '\n' ' ' | cut -b1,2)
+        temp="${coretemp}Â°C"
+        echo $temp
+}
+
+mem() {
+        memtotal="$(($(sysctl -n hw.physmem64) / 1024 / 1024))"
+        memused="$(($(vmstat | awk 'END {printf $3}') / 1024))"
+        mem="${memused}MB"
+        echo $mem
+}
+
+vol() {
+        vol=$(vol.sh)
+        echo $vol
+}
+
+while true
+do
+	echo -e "%{F#000000}%{B#F0EEDD}%{l}\ue01c $(temp)  \ue040 $(bat)  \ue015 $(gettime)  :::::::::::::::::::::::::::  $(getdate)"
+	sleep 1.0
+done | \
+
+lemonbar -d \
+         -f -misc-sleekspace-medium-r-normal--18-18-75-75-c-70-iso10646-1 \
+         -o 0 \
+         -f -shinonome-jamixspace-medium-r-normal--18-18-75-75-c-140-iso10646-1 \
+         -o 0 \
+         -f -wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1 \
+         -o -3 \
+		 -B "#F0EEDD" \
+		 -F "#000000" \
+         -g 514x20+456+653 \
+

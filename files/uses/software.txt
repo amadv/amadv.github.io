@@ -1,0 +1,33 @@
+Software
+
+- X1 Nano Gen 2
+
+* OS: Fedora Silverblue
+* WM: Gnome
+* SH: bash
+* Terminal: console
+* Text editor: nvi / zed
+* Container: podman
+* Development: toolbx
+* AI: ollama - codellama
+* Email: thunderbird
+* Web browser: firefox 
+
+- X260 / Server
+
+* OS: NetBSD
+* WM: cwm
+* SH: sh
+* Terminal: urxvt
+* Text editor: nvi / ed
+* File manager: nnn
+* Bar: lemonbar-xft
+* Music player: cmus
+* Video player: ffplay
+* Image viewer: nsxiv
+* Email: aerc
+* Lock: slock
+* Web browser: Firefox / w3m / Dillo
+* Web server: bozohttpd
+* Misc: xmbdfed / xbanish / xcalib
+

@@ -1,28 +1,11 @@
-# My personal website
+## Aaron's Blog <3
 
-This is source code for [amadv.github.com](https://amadv.github.io), my personal website.
-It is written mostly in bash, and uses [markdown.awk from knazarov](https://git.knazarov.com/knazarov/markdown.awk) to convert
-markdown posts and pages to HTML.
+Minimal in design capturing thoughts in my quite garden
 
-The site has very minimal CSS (about 110 lines) that should be enough to display fine in most browsers
-including mobile..
+Built with html
 
-I don't intend the code to be easily readable, but given that it's not much, you can probably figure
-things out.
+Posts generated with sh and ed
 
-## Setup
-* `python -m venv venv`
-* `source ./venv/bin/activate`
-* `pip install -r requirements.txt`
-* `python gen.py`
-
-## Building
-
-If you're on any Linux system, you can just type `make` in your terminal, and the result will be in the
-`./output` directory. However, if you're on a Mac, you probably would need to use gnu awk/sed.
-
-
-## License
-
-The code is BSD licensed.
-Content in Markdown files is [CC-BY](https://creativecommons.org/licenses/by-sa/4.0/).
+### Improvements
+* add doc for setup and documentation
+* mv sh script to perl for readablity

@@ -1,0 +1,21 @@
+--- ufetch-netbsd.orig	2024-11-24 04:18:28.000000000 +0900
++++ ufetch-netbsd	2025-05-06 21:34:31.990409496 +0900
+@@ -73,12 +73,10 @@
+ 
+ cat <<EOF
+ 
+-${c0}  \\\\${c1}\`-______,----__    ${nc}${USER}${ic}@${nc}${host}${reset}
+-${c0}   \\\        ${c1}__,---\`_  ${lc}OS:        ${ic}${os}${reset}
+-${c0}    \\\       ${c1}\`.____    ${lc}KERNEL:    ${ic}${kernel}${reset}
+-${c0}     \\\\${c1}-______,----\`-  ${lc}UPTIME:    ${ic}${uptime}${reset}
+-${c0}      \\\               ${lc}PACKAGES:  ${ic}${packages}${reset}
+-${c0}       \\\              ${lc}SHELL:     ${ic}${shell}${reset}
+-${c0}        \\\             ${lc}${uitype}:        ${ic}${ui}${reset}
++${c0}  \=====__    ${lc}os: ${ic}netbsd${reset}
++${c0}   \===_      ${lc}wm: ${ic}${ui}${reset}
++${c0}    \         ${lc}sh: ${ic}${shell}${reset}
++${c0}     \        ${lc}pk: ${ic}${packages}${reset}
++${c0}      \       ${lc}up: ${ic}${uptime}${reset}
+ 
+ EOF
+

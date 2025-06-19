@@ -1,0 +1,4 @@
+#!/bin/sh
+
+nohup nsxiv -g 480x608  -b -a -t . > /dev/null 2>&1 &
+

@@ -1,0 +1,28 @@
+#	$NetBSD: dot.shrc,v 1.3 2007/11/24 11:14:42 pavel Exp $
+
+if [ -f /etc/shrc ]; then
+	. /etc/shrc
+fi
+
+case "$-" in *i*)
+	# interactive mode settings go here
+	PS1="> "
+	set -o emacs
+	set -o tabcomplete
+
+	alias fetch='ufetch'
+	alias mixer='aiomixer'
+
+	alias 2chan='w3m -no-graph https://www.2chan.net/i.htm'
+	alias 5chan='w3m -no-graph https://mao.5ch.net/linux'
+	alias duck='w3m -no-graph duckduckgo.com'
+	alias novel='w3m -no-graph https://yomou.syosetu.com/rank/genretop/#genre_yearly'
+	alias jisho='w3m -no-graph http://nihongo.monash.edu/cgi-bin/wwwjdic?1C'
+	alias news='w3m -no-graph https://news.yahoo.co.jp/'
+
+	alias off='doas shutdown -p now'
+	alias reboot='doas shutdown -r now'
+	alias cl="clear && echo '+     +8     +16     +24     +32     +40     +48     +56     +64'"
+	;;
+esac
+

@@ -1,0 +1,32 @@
+#!/bin/sh
+
+TITLE=$(head -n 1 $1)
+DIR=/home/amadv/var/www/aaronmadved.com
+
+NR=$(ls /home/amadv/doc/thoughts/public | wc -l | awk '{print $1 - 1}')	
+NEWLINE="			<span>${NR}.</span> <a href=\"/posts/$1/\"><i>${TITLE}</i></a><br>"
+
+if grep -q "$1" ${DIR}/index.html; then
+	echo "Already exists"
+	exit 1
+else
+ed -s ${DIR}/index.html << EOF
+/post
+i
+${NEWLINE}
+.
+/\/nav/-1d
+w
+q
+EOF
+fi
+
+ed -s ${DIR}/posts/index.html << EOF
+/post
+i
+${NEWLINE}
+.
+w
+q
+EOF
+

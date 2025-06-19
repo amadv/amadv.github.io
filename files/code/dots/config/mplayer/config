@@ -1,0 +1,9 @@
+vo=gl
+xy=880
+geometry=50%:50%
+lavdopts:threads=2
+loop=0
+cache=16384
+cache-min=5
+cache-seek-min=0
+

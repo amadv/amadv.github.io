@@ -1,0 +1,4 @@
+#!/bin/sh
+sleep 10
+/usr/pkg/bin/sshfs amadv@192.168.2.104:/home/amadv/var/mail /home/amadv/var/mail
+

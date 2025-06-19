@@ -1,0 +1,4 @@
+#!/bin/sh
+
+dmenu_run -fn "sleekspace" -nb "#000000" -nf "#f0e4bb" -sb "#f0e4bb" -sf "#000000"
+

@@ -1,0 +1,41 @@
+borderwidth 0
+color font "#000000"
+color menubg "#f0eedd"
+color menufg "#000000"
+fontname "sleekspace"
+
+command firefox firefox
+command music 'urxvtc -g 64x32+443+80 -b 16 -e cmus'
+command gimp gimp-2.99
+command blender blender
+command xcalc xcalc
+command term 'urxvtc -g 64x32+443+80 -b 16'
+
+bind-key 4-x "urxvtc -g 64x32+443+80 -b 16 -e nnn -C" 
+bind-key 4-Return terminal
+bind-key 4-BackSpace window-hide
+bind-key 4-r restart
+bind-key 4-w window-close
+bind-key 4-z window-fullscreen
+bind-key 4-slash menu-window
+bind-key 4-period menu-ssh
+bind-key 4-p 'dmenu_run -fn sleekspace -nb "#000000" -nf "#f0eedd" -sb "#f0eedd" -sf "#000000"'
+bind-key 4-space menu-cmd
+bind-key 4-Tab window-cycle
+bind-key 4-q slock
+bind-key XF86AudioLowerVolume "voldown"
+bind-key XF86AudioRaiseVolume "volup"
+
+bind-mouse 4-1 window-move
+bind-mouse 4-3 window-resize
+
+unbind-key M-slash
+unbind-key M-period
+unbind-key M-question
+unbind-key M-Up
+unbind-key M-Down
+unbind-key M-h
+unbind-key M-j
+unbind-key M-k
+unbind-key M-l
+

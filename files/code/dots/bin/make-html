@@ -1,0 +1,145 @@
+#!/bin/sh
+# Script: make-html
+# Author: Aaron Madved (amadv)
+# Description: Script using ed to turn plain text files into html documents.
+
+TITLE=$(head -n 1 $1)
+POST_DIR=/home/oui/var/www/aaronmadved.com/posts
+
+mkdir ${POST_DIR}/$1
+
+cp $1 /tmp/ed
+
+# Subtitle
+if grep -q "``" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/``/s/.*/<h2>&<\/h2>/
+w /tmp/ed
+q
+EOF
+else
+	exit 1
+fi
+
+# Image
+if grep -q "\[img/" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/\[img/s/\[/<img src="/
+g/src="/s/\]/">/
+w
+q
+EOF
+else
+	return 1
+fi
+
+
+# Links
+if grep -q "(@[^)]" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/(@[^)]/s/(@[^ ]*/===&===/g
+g/(@[^)]/s/(@[^)]*/&===/g
+g/===(@/s//<a href="/g
+g/===)/s//"><i>/g
+g/\.===/s//===\./g
+g/===/s//<\/i><\/a>/g
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# Link first line
+if grep -q "^(@[^)]" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/^<a/s/.*/<p>&<\/p>/
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# List (unordered)
+if grep -q "\* " $1; then
+	ed -s /tmp/ed << 'EOF'
+g/^\* .*/s//<li>&<\/li>/g
+g/<li>/-1s/^$/<ul>/
+g/<li>/+1s/^$/<\/ul>/
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# List (ordered)
+if grep -q "^[[:digit:]]\. " $1; then
+	ed -s /tmp/ed << 'EOF'
+g/^[[:digit:]]\. .*/s//<li>&<\/li>/g
+g/<li>[[:digit:]]/-1s/^$/<ol>/
+g/<li>[[:digit:]]/+1s/^$/<\/ol>/
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# Code block
+if grep -q "+++" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/+++/s/.*/<pre><code>/
+g/---/s/.*/<\/code><\/pre>/
+g/<code>/j
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# Highlight
+if grep -q "**-" $1; then
+	ed -s /tmp/ed << 'EOF'
+g/\*\*-/s//<i>/
+g/-\*\*/s//<\/i>/
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+ed -s /tmp/ed << 'EOF'
+g/^$/d
+%s/^[^<`].*/<p>&<\/p>/
+1s/p>/h1>/g
+$s/p>/time>/g
+w
+q
+EOF
+
+# Cleaning backticks in code blocks (temporary solution)
+if grep -q "^\` " $1; then
+	ed -s /tmp/ed << 'EOF'
+g/^` /s///
+g/<code>` /s/` //
+w /tmp/ed
+q
+EOF
+else
+	return 1
+fi
+
+# Merge /tmp/ed into our html template file
+ed ${POST_DIR}/template.html << EOF
+/title/
+s/X/${TITLE}/
+/main/
+.r /tmp/ed
+w ${POST_DIR}/$1/index.html
+q
+EOF
+

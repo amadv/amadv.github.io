@@ -1,0 +1,41 @@
+Xft.dpi: 96
+
+Xcursor.theme: Adwaita
+
+!blk
+*color0:  #f0eedd
+*color8:  black
+
+!red
+*color1:  black
+*color5:  black
+*color9:  black
+*color13: black
+
+!grn
+*color3:  black
+*color2:  black
+*color10: black
+*color11: black
+
+!blu
+*color4:  black
+*color6:  black
+*color12: black
+*color14: black
+
+!wht
+*color7:  #f0eedd
+*color15: black
+
+URxvt.termName: rxvt
+URxvt.font: -misc-sleekspace-medium-r-normal--18-18-75-75-c-70-iso10646-1,-shinonome-jamixspace-medium-r-normal--18-18-75-75-c-140-iso10646-1,-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1
+!URxvt.font: -misc-spleen-medium-r-normal--12-120-72-72-c-60-iso10646-1
+URxvt.boldFont: 
+URxvt.background: #f0eedd
+URxvt.scrollBar: false
+URxvt.cursorUnderline: 1
+
+Nsxiv.window.background: #f0eedd
+Nsxiv.bar.font: sleekspace
+

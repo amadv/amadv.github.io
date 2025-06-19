@@ -1,0 +1,40 @@
+Xft.dpi: 144
+
+Xcursor.theme: Adwaita
+
+!blk
+*color0:  #f0ddb2
+*color8:  black
+
+!red
+*color1:  black
+*color5:  black
+*color9:  black
+*color13: black
+
+!grn
+*color3:  black
+*color2:  black
+*color10: black
+*color11: black
+
+!blu
+*color4:  black
+*color6:  black
+*color12: black
+*color14: black
+
+!wht
+*color7:  #f0ddb2
+*color15: black
+
+!URxvt.font: -x-oui-small-bold-r-normal--28-28-72-72-c-120-iso10646-1,-kappa-mincho-bold-r-normal--20-190-75-75-c-200-jisx0208.1990-0
+URxvt.font: -x-oui-smalltall-bold-r-normal--29-29-72-72-c-120-iso10646-1,-kappa-mincho-bold-r-normal--20-190-75-75-c-200-jisx0208.1990-0
+URxvt.boldFont: 
+URxvt.background: #f0ddb2
+URxvt.scrollBar: false
+URxvt.cursorUnderline: 1
+
+Nsxiv.window.background: #f0ddb2
+Nsxiv.bar.font: oui\-small\:pixelsize\=28
+
