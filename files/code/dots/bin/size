@@ -1,0 +1,39 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use File::Find;
+use File::stat;
+
+# Check argument
+my $target = shift @ARGV or die "Usage: $0 <file-or-directory>\n";
+
+# Check if file or dir exists
+die "Error: '$target' does not exist\n" unless -e $target;
+
+# Get total size in bytes
+my $total_bytes = 0;
+
+if (-f $target) {
+    $total_bytes = stat($target)->size;
+} elsif (-d $target) {
+    find(sub {
+        return unless -f $_;
+        my $s = stat($_);
+        $total_bytes += $s->size if $s;
+    }, $target);
+} else {
+    die "Error: '$target' is neither a file nor a directory\n";
+}
+
+# Convert sizes
+my $kb = $total_bytes / 1024;
+my $mb = $kb / 1024;
+my $gb = $mb / 1024;
+
+# Print results
+printf "Size of '%s':\n", $target;
+printf "  Bytes     : %d\n", $total_bytes;
+printf "  Kilobytes : %.2f KB\n", $kb;
+printf "  Megabytes : %.2f MB\n", $mb;
+printf "  Gigabytes : %.2f GB\n", $gb;
+

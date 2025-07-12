@@ -1,0 +1,35 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+# Check for input file
+my $file = shift @ARGV or die "Usage: $0 <file.html>\n";
+
+# Check that file exists
+die "Error: '$file' does not exist.\n" unless -e $file;
+
+# Optional: backup original
+my $backup = "$file.bak";
+copy_file($file, $backup);
+print "Backup saved to: $backup\n";
+
+# Run tidy with basic settings
+my $tidy_cmd = "tidy -i -q -wrap 80 --show-warnings no -utf8 -m \"$file\"";
+
+print "Running: $tidy_cmd\n";
+
+system($tidy_cmd) == 0
+  or die "Failed to run tidy on $file\n";
+
+print "Done formatting: $file\n";
+
+# Copy helper
+sub copy_file {
+  my ($src, $dest) = @_;
+  open my $in,  '<', $src  or die "Can't read $src: $!";
+  open my $out, '>', $dest or die "Can't write $dest: $!";
+  print $out $_ while <$in>;
+  close $in;
+  close $out;
+}
+
