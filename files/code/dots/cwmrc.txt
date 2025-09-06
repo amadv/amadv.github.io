@@ -2,40 +2,59 @@ borderwidth 0
 color font "#000000"
 color menubg "#f0eedd"
 color menufg "#000000"
-fontname "sleekspace"
+fontname "Ubuntu Mono"
 
 command firefox firefox
 command music 'urxvtc -g 64x32+443+80 -b 16 -e cmus'
 command gimp gimp-2.99
 command blender blender
 command xcalc xcalc
-command term 'urxvtc -g 64x32+443+80 -b 16'
+command term 'urxvt -g 42x21+295+53 -b 16'
 
-bind-key 4-x "urxvtc -g 64x32+443+80 -b 16 -e nnn -C" 
-bind-key 4-Return terminal
-bind-key 4-BackSpace window-hide
-bind-key 4-r restart
-bind-key 4-w window-close
-bind-key 4-z window-fullscreen
-bind-key 4-slash menu-window
-bind-key 4-period menu-ssh
-bind-key 4-p 'dmenu_run -fn sleekspace -nb "#000000" -nf "#f0eedd" -sb "#f0eedd" -sf "#000000"'
-bind-key 4-space menu-cmd
-bind-key 4-Tab window-cycle
-bind-key 4-q slock
+bind-key M-x "urxvt -g 42x21+295+53 -b 16 -e nnn -C"
+bind-key M-Return terminal
+bind-key M-BackSpace window-hide
+bind-key M-r restart
+bind-key M-w window-close
+bind-key M-z window-fullscreen
+bind-key M-slash menu-window
+bind-key M-period menu-ssh
+bind-key M-p 'dmenu_run -fn sleekspace -nb "#000000" -nf "#f0eedd" -sb "#f0eedd" -sf "#000000"'
+bind-key M-space menu-cmd
+bind-key M-Tab window-cycle
+bind-key M-q slock
 bind-key XF86AudioLowerVolume "voldown"
 bind-key XF86AudioRaiseVolume "volup"
+bind-key XF86MonBrightnessDown "brightdown"
+bind-key XF86MonBrightnessUp "brightup"
 
-bind-mouse 4-1 window-move
-bind-mouse 4-3 window-resize
+bind-mouse M-1 window-move
+bind-mouse M-3 window-resize
 
-unbind-key M-slash
-unbind-key M-period
-unbind-key M-question
-unbind-key M-Up
-unbind-key M-Down
-unbind-key M-h
-unbind-key M-j
-unbind-key M-k
-unbind-key M-l
+# switch to workspace
+sticky yes
+bind-key M-1 group-only-1
+bind-key M-2 group-only-2 
+bind-key M-3 group-only-3
+bind-key M-4 group-only-4
+# move window to workspace 
+bind-key MS-1 window-movetogroup-1
+bind-key MS-2 window-movetogroup-2
+bind-key MS-3 window-movetogroup-3
+bind-key MS-4 window-movetogroup-4
+
+bind-key M-h window-move-left-big
+bind-key M-l window-move-right-big
+bind-key M-k window-move-up-big
+bind-key M-j window-move-down-big
+bind-key MS-h window-resize-left-big
+bind-key MS-l window-resize-right-big
+bind-key MS-k window-resize-up-big
+bind-key MS-j window-resize-down-big
+
+#unbind-key M-slash
+#unbind-key M-period
+#unbind-key M-question
+#unbind-key M-Up
+#unbind-key M-Down
 

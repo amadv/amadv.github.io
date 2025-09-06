@@ -1,5 +1,2 @@
 #!/bin/sh
-
-mixerctl -w outputs.master+=5
-mixerctl -w outputs.master2+=5
-
+amixer set Master 5%+

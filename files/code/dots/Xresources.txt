@@ -29,13 +29,12 @@ Xcursor.theme: Adwaita
 *color15: black
 
 URxvt.termName: rxvt
-URxvt.font: -misc-sleekspace-medium-r-normal--18-18-75-75-c-70-iso10646-1,-shinonome-jamixspace-medium-r-normal--18-18-75-75-c-140-iso10646-1,-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1
-!URxvt.font: -misc-spleen-medium-r-normal--12-120-72-72-c-60-iso10646-1
-URxvt.boldFont: 
+URxvt.font: xft:Ubuntu Mono:style=Medium:size=16
+URxvt.boldFont: xft:Ubuntu Mono:style=Medium:size=16
 URxvt.background: #f0eedd
 URxvt.scrollBar: false
 URxvt.cursorUnderline: 1
 
 Nsxiv.window.background: #f0eedd
-Nsxiv.bar.font: sleekspace
+Nsxiv.bar.font: xft:Ubuntu Mono:style=Medium:size=16
 
