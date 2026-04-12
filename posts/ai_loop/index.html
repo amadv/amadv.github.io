@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>On Building AI Systems That Don't Eat You Alive</title>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+ul,ol { list-style: none }
+
+:root { --lh: 1.5em }
+
+::selection { background: #ddd; color: #000 }
+
+html {
+    margin: 0 0 0 calc(100vw - 100%);
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+}
+
+body {
+    font: 1em/var(--lh) monospace;
+    background: #eee;
+    padding: 16vh 2em 0;
+    display: grid;
+	grid: 1fr / minmax(auto, 64ch);
+    justify-content: center;
+    height: 100%;
+}
+
+a {
+	display: inline-block;
+	padding: .16666em;
+	margin-left: -.16666em;
+	text-decoration: none;
+}
+
+a.inline {
+	margin: 0;
+	padding: 0;
+}
+
+a i { border-bottom: 1px dotted }
+a:active i { border: none }
+
+h1,h2,p,pre { margin-bottom: var(--lh) }
+
+h2 { margin-top: calc(var(--lh)*2) }
+
+.highlight { background: #ddd; padding: 0 3px }
+
+.strike,
+.strike a { text-decoration: line-through }
+
+img { width: 100% }
+
+time { color: #888 }
+
+ul,ol { margin: 0 0 var(--lh) 2ch }
+li { text-indent: -2ch }
+
+footer { padding: calc(var(--lh)*2) 0 8vh }
+footer p { margin-bottom: 0 }
+
+pre {
+	background: #e5e5e5;
+	border: 1px solid #d5d5d5;
+	padding: calc(var(--lh) / 2);
+	//white-space: pre-wrap;
+	overflow: auto;
+	border-radius: 3px;
+}
+
+pre ::selection {
+	background: #777;
+	color: #eee;
+}
+
+@media (max-device-width: 600px) {
+    body {
+		padding-top: 2em;
+		justify-content: start;
+	}
+    footer { padding-bottom: 2em }
+	pre { max-width: calc(100vw - 4em) }
+	a i { border-color: #888 }
+}
+
+</style>
+
+</head>
+<body>
+	<main>
+<h1>On Building AI Systems That Don't Eat You Alive</h1>
+<p>-</p>
+<p>Slow enough to follow.<br>
+Fast enough to ship.<br>
+How a strict loop, a JSON backlog, and a forced review pass<br>
+turned autonomous coding from anxiety into leverage.</p>
+<p>Gas Town and the 20-agent swarm crowds miss something obvious: humans become the bottleneck. When you're juggling two dozen Claude Code instances, you can't actually follow what's happening. You're along for the ride, hoping the factory doesn't disembowel you.</p>
+<p>That's not autonomy I can trust.</p>
+<p>"Too fast causes anxiety and loss of control. Too slow causes boredom and disengagement. The sweet spot is just barely above your ability to intervene."</p>
+<p>A day or two for a project is the right tempo. It gives you space to do other things, let the system run, and check in with enough context to redirect. If it's been coding for 48 hours and the direction is wrong, you can stop it and pivot. Nothing is a total loss yet.</p>
+
+<h2>The backlog inversion</h2>
+<p>Free-form AI coding turns you into the project manager: breaking down tasks, checking completeness, deciding what's next. The AI is smart, but you're doing all the orchestration.</p>
+<p>A backlog inverts this. The AI pulls tasks, completes them, and then — crucially — runs a review pass that either adds new work or marks the project complete. The review pass behaves like a senior dev: read the whole repo, check against source specs, decide what's missing. Only the review pass can append the project-done marker.</p>
+<p>When every task is explicit and every update flows through a schema, you get traceability for free. No task can sprawl because each iteration has a single objective. You can always answer: what changed, why, and in which iteration?</p>
+
+<h2>The five rules of the loop</h2>
+<p>01 — One task per iteration<br>
+No partial work, no multitasking, no drift.</p>
+<p>02 — JSON backlog as source of truth<br>
+The plan and the audit surface are the same file.</p>
+<p>03 — Schema-driven updates<br>
+Every change flows through jq. Nothing is implicit.</p>
+<p>04 — JSONL logging<br>
+Replay, diff, and measure every run.</p>
+<p>05 — Forced review pass<br>
+A senior-style gate that either adds work or marks the project done.</p>
+<p>The rule is boring on purpose. Boring scales.</p>
+<p>-</p>
+<p>If you're building with AI, don't give it free-form leeway. Give it:</p>
+<ul>
+<li>* A backlog — so the work is explicit</li>
+<li>* A schema — so the updates are mechanical</li>
+<li>* A review gate — so completion is honest</li>
+</ul>
+<p>The magic isn't in the model. The magic is in the constraints.</p>
+<time>2026-04-12</time>
+	</main>
+<footer>
+	<p><a href="../"><i>../</i></a></p>
+</footer>
+</body>
+</html>
