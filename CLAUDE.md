@@ -104,6 +104,16 @@ Plain text. No HTML wrapper. Append or edit in place.
 - **Voice input** — interpret intent, don't flag obvious transcription errors
 - **Sensitive content** — mark as `<!-- private -->` in HTML if the user flags it
 
+## Updating Files
+
+When adding or modifying anything under `files/`, always update the `<time>` date for that entry in the parent `index.html` to today's date.
+
+Examples:
+- Edit `files/code/dots/vimrc.txt` → update its `<time>` in `files/code/dots/index.html` and the `dots/` entry in `files/code/index.html`
+- Edit `files/uses/software.txt` → update the `software.txt` entry date in its parent index if one exists
+
+When adding a new file under `files/`, also add a linked entry to the parent `index.html` so it appears in the listing. Match the existing table row format with filename, date, and size.
+
 ## Push Code
 
 When the user says "push code" (or similar), Claude will:
