@@ -106,13 +106,17 @@ Plain text. No HTML wrapper. Append or edit in place.
 
 ## Updating Files
 
-When adding or modifying anything under `files/`, always update the `<time>` date for that entry in the parent `index.html` to today's date.
+**Every time** a file under `files/` is added or modified, two things are required — no exceptions:
+
+1. **Update the `<time>` date** for that entry in the parent `index.html` to today's date
+2. **If adding a new file**, add a linked table row to the parent `index.html` so it appears in the listing (match existing row format: filename link, date, size)
+
+This applies to every subdirectory: `files/whoami/`, `files/uses/`, `files/code/dots/`, `files/code/pkgsrc/`, `files/images/`, `files/people/`, etc.
 
 Examples:
-- Edit `files/code/dots/vimrc.txt` → update its `<time>` in `files/code/dots/index.html` and the `dots/` entry in `files/code/index.html`
-- Edit `files/uses/software.txt` → update the `software.txt` entry date in its parent index if one exists
-
-When adding a new file under `files/`, also add a linked entry to the parent `index.html` so it appears in the listing. Match the existing table row format with filename, date, and size.
+- Edit `files/whoami/interests.txt` → update its `<time>` in `files/whoami/index.html`
+- Add `files/code/dots/vimrc.txt` → add row to `files/code/dots/index.html` AND update `dots/` date in `files/code/index.html`
+- Edit `files/uses/software.txt` → update its `<time>` in the parent index
 
 ## Push Code
 
