@@ -104,6 +104,15 @@ Plain text. No HTML wrapper. Append or edit in place.
 - **Voice input** — interpret intent, don't flag obvious transcription errors
 - **Sensitive content** — mark as `<!-- private -->` in HTML if the user flags it
 
+## Push Code
+
+When the user says "push code" (or similar), Claude will:
+1. `git add` all changed files appropriately (no secrets, no junk)
+2. Write a short, accurate commit message based on what changed
+3. `git push`
+
+Confirm briefly what was committed and pushed.
+
 ## Evolving the System
 
 If content doesn't fit an existing section, propose a new folder with rationale before creating it. If approved: create it and update this CLAUDE.md.
