@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Human Voices</title>
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    box-sizing: border-box;
+}
+
+ul,ol { list-style: none }
+
+:root { --lh: 1.5em }
+
+::selection { background: #ddd; color: #000 }
+
+html {
+    margin: 0 0 0 calc(100vw - 100%);
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+}
+
+body {
+    font: 1em/var(--lh) monospace;
+    background: #eee;
+    padding: 16vh 2em 0;
+    display: grid;
+	grid: 1fr / minmax(auto, 64ch);
+    justify-content: center;
+    height: 100%;
+}
+
+a {
+	display: inline-block;
+	padding: .16666em;
+	margin-left: -.16666em;
+	text-decoration: none;
+}
+
+a.inline {
+	margin: 0;
+	padding: 0;
+}
+
+a i { border-bottom: 1px dotted }
+a:active i { border: none }
+
+h1,h2,p,pre { margin-bottom: var(--lh) }
+
+h2 { margin-top: calc(var(--lh)*2) }
+
+.highlight { background: #ddd; padding: 0 3px }
+
+.strike,
+.strike a { text-decoration: line-through }
+
+img { width: 100% }
+
+time { color: #888 }
+
+ul,ol { margin: 0 0 var(--lh) 2ch }
+li { text-indent: -2ch }
+
+footer { padding: calc(var(--lh)*2) 0 8vh }
+footer p { margin-bottom: 0 }
+
+pre {
+	background: #e5e5e5;
+	border: 1px solid #d5d5d5;
+	padding: calc(var(--lh) / 2);
+	//white-space: pre-wrap;
+	overflow: auto;
+	border-radius: 3px;
+}
+
+pre ::selection {
+	background: #777;
+	color: #eee;
+}
+
+@media (max-device-width: 600px) {
+    body {
+		padding-top: 2em;
+		justify-content: start;
+	}
+    footer { padding-bottom: 2em }
+	pre { max-width: calc(100vw - 4em) }
+	a i { border-color: #888 }
+}
+
+</style>
+
+</head>
+<body>
+	<main>
+<h1>Human Voices</h1>
+<p>-</p>
+<p>With most content now AI-generated, writing without it matters more than ever. This blog is where I find my own voice. Writing is thinking — without it, I'd stop evolving.</p>
+<h2>Writing</h2>
+<p>Every time I sit down to write, I do it for me. Long flights, busy cafes — wherever. I'm overcoming a tendency to consume and, instead, producing something.</p>
+<p>Creativity flows like a faucet. You have to let it run a while before anything clear comes through. That's why I write as much as I can, across topics from biology to economics. Writing distills thinking. It's only while writing that I dive deep enough to develop my own ideas and my own bet on what the future looks like — shaping the world instead of being shaped by it.</p>
+<h2>Your voice</h2>
+<p>Writing will feel awkward at first. It might always. But the more you do it, the more you develop your own voice — sharp and dry, or playful. A good idea, written down, has zero marginal cost to spread. Your voice becomes your personal brand: a way to connect with readers, share what you know, and make the world a bit less siloed.</p>
+<h2>Own it</h2>
+<p>The internet was built on collaboration and openness. Today it's mostly monetized, walled, or optimized for engagement. Social media users perform instead of being — adopting no one's voice to chase visibility.</p>
+<p>It doesn't have to be that way. Cultivate your own corner of the internet. For me that means open formats (Markdown), open-source software (Jekyll), static hosting, RSS, and owning my domain. My voice stays mine while reaching whoever wants to hear it.</p>
+<h2>On AI</h2>
+<p>Using AI to write strips you of your own voice. I write all posts myself — no AI drafts, no rewrites. When I'm done, I'll ask it to flag typos or awkward phrasing, then manually decide what to keep. I also use it to quickly validate assumptions. It would be a disadvantage not to understand its strengths and weaknesses.</p>
+<time>2026-04-18</time>
+	</main>
+<footer>
+	<p><a href="../"><i>../</i></a></p>
+</footer>
+</body>
+</html>
