@@ -1,0 +1,47 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Claude to DeepSeek - Dev.Madved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# From Claude to DeepSeek
+
+I switched my AI tooling from Claude to DeepSeek recently. Two reasons: price and simplicity.
+
+## Price
+
+Claude was costing me around $20 a month. DeepSeek? Fraction of that. The API pricing is roughly 10x cheaper for comparable quality. When you're making hundreds of calls a day, that adds up fast.
+
+For the same monthly budget, I get way more runway. No more thinking twice before asking a question.
+
+## Simple tools
+
+The real win wasn't just the cheaper tokens. It's the tooling that comes with it.
+
+DeepCode is a CLI tool that does one thing well: it sits in your terminal, understands your project, and helps you write code without the overhead of a chat interface or a heavy IDE plugin. No agents, no swarms, no orchestration layers. Just a prompt and an answer.
+
+That's it. No $20 subscription. No complex setup. No prompt engineering playbook.
+
+A terminal, a model, and go.
+
+## What I lost
+
+Claude is great. The artifact system is polished. The context window is enormous. But for how I work — quick iterations, terminal-first, small projects — DeepSeek and DeepCode cover 90% of what I need at 10% of the cost.
+
+The other 10% I can live without.
+</body>
+</html>

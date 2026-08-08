@@ -1,0 +1,32 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Requirements - Dev.Madved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# The Requirements
+
+I don't need much to be productive: a web browser and a shell. The browser is my gateway to most apps and services. Even when native or Electron apps are available, I prefer to run things directly in the browser to leverage its sandbox, adding another layer to defense in depth. The shell usually provides all the rest, including an editor and access to other hosts.
+
+A good shell setup should feel like home: for instance, my text editor should be ready with all the plugins I use; git should know who I am and how I prefer to fetch branches or sign commits. It should be easy to update, audit, and (re)build the full configuration from scratch. Deploying it to a clean device should be fast (minutes). Importantly, the environment should not bundle any secret (e.g., passwords or cryptographic keys) or confidential information, nor should it have access to any long-lived credential.
+
+The lack of secrets and credentials is important for safety:
+
+- \* If the environment is compromised at rest, there is nothing to exfiltrate. Plus, we do not need to worry about delivering it privately to the Chromebook, where we store it, if it leaks, and when to dispose it.
+- \* Similarly, an attacker that compromises a running system (e.g., through a malicious executable), will not find any long-lived credential to steal.
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whale Watcher - Dev.Madved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Whale Watcher
+
+I built a free, open-source tool that runs inside a Claude Code session to monitor large on-chain movements across Bitcoin, Ethereum, and Solana in real time.
+
+The idea is simple: the biggest players in crypto move billions between wallets before anything shows up on price charts. Exchanges rebalancing cold storage, the Mt. Gox hacker waking up, FTX estate dumping SOL, Vitalik moving ETH — these are signals, and they're all publicly visible on-chain if you know where to look.
+
+Whale Watcher polls a curated list of high-profile wallets using nothing but free APIs — mempool.space for BTC, Etherscan's free tier for ETH, and Solana's public RPC for SOL. No paid subscriptions, no third-party dashboards. A shell script handles the polling and feeds every event as a live stream into a Claude Code session via the Monitor tool.
+
+Claude then acts as the analyst. When a significant move hits, it reads the direction, the wallet tier, and the dollar value, and tells you in plain English what it likely means — accumulation, sell pressure, estate liquidation, or a dormant wallet worth watching. Critical moves over $50M interrupt whatever you're doing.
+
+The whole thing is a few files: a polling script, a JSON address list you can extend yourself, and a CLAUDE.md that tells Claude how to behave during the session.
+
+[→ github.com/amadv/whale-watcher](https://github.com/amadv/whale-watcher)
+</body>
+</html>

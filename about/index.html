@@ -1,0 +1,49 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# About
+
+<img src="/about/me.jpeg" class="profile">
+
+**Aaron Madved** has been building software for over a decade, with a career that weaves between traditional finance and the cutting edge of crypto. His journey began in Shanghai during the 2017 ICO boom, where he worked on exchanges
+and blockchain infrastructure at Viewfin.
+
+After a stint in Germany modernizing legacy systems, he brought his fullstack expertise to Pittsburgh, working on cloud computing with Microsoft and CMU before spending three years in Hong Kong as a Lead Backend Engineer at BCW, architecting enterprise staking platforms, cross-chain bridges, and RPC infrastructure.
+
+Aaron returned to the US and has been a Tech Lead at CGI and now **PNC**,
+where he navigates the complexities of financial systems while maintaining a deep
+connection to crypto, AI, and decentralized technologies.
+
+As a battle tested engineer, he's built crypto exchanges during a market frenzy,
+architected cross-chain bridges, managed globally distributed node operations,
+led teams across multiple financial clients, and shipped everything from Angular
+component libraries to AI agent swarm infrastructure and has an ever growing
+collection of scars from production outages to prove it.
+
+<picture>
+  <!-- Image shown when dark mode is enabled -->
+  <source media="(prefers-color-scheme: dark)" srcset="./about/jobs-dark.png">
+  
+  <!-- Fallback/Default image shown when light mode is enabled -->
+  <img src="./about/jobs.png" alt="App Logo">
+</picture>
+
+</body>
+</html>

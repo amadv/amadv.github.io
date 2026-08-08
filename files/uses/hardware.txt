@@ -1,7 +1,0 @@
-Hardware
-
--
-
-* ThinkPad X1 Nano Gen 2 (daily driver)
-* Raspberry Pi 4 (server)
-
