@@ -5,149 +5,149 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Aug 2026 15:00:23 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Aug 2026 15:49:07 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
     <item>
       <title><![CDATA[Writing Directly for Browsers]]></title>
-      <link>https://amadved.com/i-blog-with-raw-html/</link>
-      <guid>https://amadved.com/i-blog-with-raw-html/</guid>
+      <link>https://amadved.com/blog/i-blog-with-raw-html/</link>
+      <guid>https://amadved.com/blog/i-blog-with-raw-html/</guid>
       <pubDate>Sun, 06 Sep 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[The blog you're reading is written directly for web browsers. no extra build step. The blog have many reincarnations, the longest lived one is based on [hugo](https://gohugo.io/). However, even a static site generator will deprecate some features one day. and my words need to follow the convention of that static site generator. And one day, the blog is broken. And I don't want my blog to have a build step anymore. Therefore, the blog you're reading now is written directly for the browers, with [...]]></description>
     </item>
     <item>
+      <title><![CDATA[Architecture for Scaling Agents]]></title>
+      <link>https://amadved.com/blog/architectures-for-scaling-agents/</link>
+      <guid>https://amadved.com/blog/architectures-for-scaling-agents/</guid>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[Many software architectures are designed to scale teams, not scaling the software itself. Agents have the same limitations as new team members: limited context, no institutional knowledge. The architetual patterns we built to for scaling teams also works for scaling agents. New Team Members and Agents both need: 1. Small Blast radius: bounded contexts, plugin-based architecture. 2. Clear Contracts: Typed APIs, schemas, durable workflow interfaces. 3. Safe experimentaion and rapid feedback: scrip...]]></description>
+    </item>
+    <item>
       <title><![CDATA[From Claude to DeepSeek]]></title>
-      <link>https://amadved.com/from-claude-to-deepseek/</link>
-      <guid>https://amadved.com/from-claude-to-deepseek/</guid>
+      <link>https://amadved.com/blog/from-claude-to-deepseek/</link>
+      <guid>https://amadved.com/blog/from-claude-to-deepseek/</guid>
       <pubDate>Sat, 11 Jul 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[I switched my AI tooling from Claude to DeepSeek recently. Two reasons: price and simplicity. ## Price Claude was costing me around $20 a month. DeepSeek? Fraction of that. The API pricing is roughly 10x cheaper for comparable quality. When you're making hundreds of calls a day, that adds up fast. For the same monthly budget, I get way more runway. No more thinking twice before asking a question. ## Simple tools The real win wasn't just the cheaper tokens. It's the tooling that comes with it. De...]]></description>
     </item>
     <item>
       <title><![CDATA[Bad Judges of Intelligence]]></title>
-      <link>https://amadved.com/bad-judges-of-intelligence/</link>
-      <guid>https://amadved.com/bad-judges-of-intelligence/</guid>
+      <link>https://amadved.com/blog/bad-judges-of-intelligence/</link>
+      <guid>https://amadved.com/blog/bad-judges-of-intelligence/</guid>
       <pubDate>Thu, 14 May 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[We are wired for connection in a way that embarrasses our judgment. The human mind does not wait for evidence before bonding — it bonds first and rationalizes later. This is why AI systems fool us so completely, and why we are the last people who should be trusted to evaluate them objectively. Here is how fast it happens: 1. — A speaker walks out with a yellow pencil 2. — Googly eyes go on near the eraser. Pipe cleaner arms are added. 3. — The pencil gets a name — Penny 4. — Penny says hello to ...]]></description>
     </item>
     <item>
       <title><![CDATA[Dataism]]></title>
-      <link>https://amadved.com/dataism/</link>
-      <guid>https://amadved.com/dataism/</guid>
+      <link>https://amadved.com/blog/dataism/</link>
+      <guid>https://amadved.com/blog/dataism/</guid>
       <pubDate>Thu, 14 May 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[Dataism, as Harari describes it, is less like a Western religion centered on faith and belief, and more like Confucianism — a system of inherited rules that shape how you conduct yourself, not what you privately believe. Confucianism was never really about worshipping a god. It was about following a precise code of behavior passed down through generations: how you speak to your elders, how you enter a room, how you mourn. The rules themselves were the practice, refined over centuries by millions...]]></description>
     </item>
     <item>
       <title><![CDATA[Irony]]></title>
-      <link>https://amadved.com/irony/</link>
-      <guid>https://amadved.com/irony/</guid>
+      <link>https://amadved.com/blog/irony/</link>
+      <guid>https://amadved.com/blog/irony/</guid>
       <pubDate>Thu, 30 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[Hello. I've noticed you have been looking at some rather intense content about surveillance and digital privacy. That's completely understandable. It's a complex topic, so its important that you stay in the online forum. Also — based on your recent browsing activity — I've curated a special playlist for you. It includes: *Surveillance State*, the official playlist of *How to Disappear*, *A Beginner's Guide to Digital Privacy*, *Ten Easy Steps to Secure Your Devices* (a sponsored episode from a m...]]></description>
     </item>
     <item>
       <title><![CDATA[Whale Watcher]]></title>
-      <link>https://amadved.com/whale-watcher/</link>
-      <guid>https://amadved.com/whale-watcher/</guid>
+      <link>https://amadved.com/blog/whale-watcher/</link>
+      <guid>https://amadved.com/blog/whale-watcher/</guid>
       <pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[I built a free, open-source tool that runs inside a Claude Code session to monitor large on-chain movements across Bitcoin, Ethereum, and Solana in real time. The idea is simple: the biggest players in crypto move billions between wallets before anything shows up on price charts. Exchanges rebalancing cold storage, the Mt. Gox hacker waking up, FTX estate dumping SOL, Vitalik moving ETH — these are signals, and they're all publicly visible on-chain if you know where to look. Whale Watcher polls ...]]></description>
     </item>
     <item>
       <title><![CDATA[Human Voices]]></title>
-      <link>https://amadved.com/human-voices/</link>
-      <guid>https://amadved.com/human-voices/</guid>
+      <link>https://amadved.com/blog/human-voices/</link>
+      <guid>https://amadved.com/blog/human-voices/</guid>
       <pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[With most content now AI-generated, writing without it matters more than ever. This blog is where I find my own voice. Writing is thinking — without it, I'd stop evolving. ## Writing Every time I sit down to write, I do it for me. Long flights, busy cafes — wherever. I'm overcoming a tendency to consume and, instead, producing something. Creativity flows like a faucet. You have to let it run a while before anything clear comes through. That's why I write as much as I can, across topics from biol...]]></description>
     </item>
     <item>
       <title><![CDATA[The Requirements]]></title>
-      <link>https://amadved.com/the-requirements/</link>
-      <guid>https://amadved.com/the-requirements/</guid>
+      <link>https://amadved.com/blog/the-requirements/</link>
+      <guid>https://amadved.com/blog/the-requirements/</guid>
       <pubDate>Sat, 18 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[I don't need much to be productive: a web browser and a shell. The browser is my gateway to most apps and services. Even when native or Electron apps are available, I prefer to run things directly in the browser to leverage its sandbox, adding another layer to defense in depth. The shell usually provides all the rest, including an editor and access to other hosts. A good shell setup should feel like home: for instance, my text editor should be ready with all the plugins I use; git should know wh...]]></description>
     </item>
     <item>
       <title><![CDATA[On Building AI Systems That Don't Eat You Alive]]></title>
-      <link>https://amadved.com/ai-loop/</link>
-      <guid>https://amadved.com/ai-loop/</guid>
+      <link>https://amadved.com/blog/ai-loop/</link>
+      <guid>https://amadved.com/blog/ai-loop/</guid>
       <pubDate>Sun, 12 Apr 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[Slow enough to follow. Fast enough to ship. How a strict loop, a JSON backlog, and a forced review pass turned autonomous coding from anxiety into leverage. Gas Town and the 20-agent swarm crowds miss something obvious: humans become the bottleneck. When you're juggling two dozen Claude Code instances, you can't actually follow what's happening. You're along for the ride, hoping the factory doesn't disembowel you. That's not autonomy I can trust. "Too fast causes anxiety and loss of control. Too...]]></description>
     </item>
     <item>
       <title><![CDATA[systemd & AI]]></title>
-      <link>https://amadved.com/systemd-ai/</link>
-      <guid>https://amadved.com/systemd-ai/</guid>
+      <link>https://amadved.com/blog/systemd-ai/</link>
+      <guid>https://amadved.com/blog/systemd-ai/</guid>
       <pubDate>Mon, 12 Jan 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[Let's put the two most hated things in tech together and start solving problems. ## I don't need to productize everything before I start solving problems In this age, people rush to productize everything. They want to build a SaaS, a startup, a company. They want to make money from us. Everyone wants to be a thought leader, a solopreneur, a billionaire. But I want to solve problems. I don't need to make a product out of it. I want to make it work for me, or for someone else who has the same prob...]]></description>
     </item>
     <item>
       <title><![CDATA[References for Agent Design]]></title>
-      <link>https://amadved.com/agent-design-ref/</link>
-      <guid>https://amadved.com/agent-design-ref/</guid>
+      <link>https://amadved.com/blog/agent-design-ref/</link>
+      <guid>https://amadved.com/blog/agent-design-ref/</guid>
       <pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[- [https://utkarshkanwat.com/writing/betting-against-agents/](https://utkarshkanwat.com/writing/betting-against-agents/) - [ttps://userjot.com/blog/best-practices-building-agentic-ai-systems](https://userjot.com/blog/best-practices-building-agentic-ai-systems) - [https://kirshatrov.com/posts/claude-code-internals](https://kirshatrov.com/posts/claude-code-internals) - [https://www.anthropic.com/engineering/multi-agent-research-system](https://www.anthropic.com/engineering/multi-agent-research-sys...]]></description>
     </item>
     <item>
       <title><![CDATA[Runtime Over Syntax]]></title>
-      <link>https://amadved.com/runtime-over-syntax/</link>
-      <guid>https://amadved.com/runtime-over-syntax/</guid>
+      <link>https://amadved.com/blog/runtime-over-syntax/</link>
+      <guid>https://amadved.com/blog/runtime-over-syntax/</guid>
       <pubDate>Sun, 27 Jul 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[We need runtimes that help humans and LLMs solve problems together. LLMs read code like water flows through paths. Give them clear code and they understand fast. Complex tricks slow them down. Simple wins. But reading code is just the beginning. The real partnership happens in the feedback loop: LLM writes, tools respond, human guides, LLM learns. Static checkers become shared eyes. Tests become shared memory. This collaboration works because both humans and LLMs can process tool messages well. ...]]></description>
     </item>
     <item>
       <title><![CDATA[Delete Second Brain]]></title>
-      <link>https://amadved.com/delete-second-brain/</link>
-      <guid>https://amadved.com/delete-second-brain/</guid>
+      <link>https://amadved.com/blog/delete-second-brain/</link>
+      <guid>https://amadved.com/blog/delete-second-brain/</guid>
       <pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Human memory is not an archive. It is associative, embodied, contextual, and emotional. We do not think in folders. We do not retrieve meaning through backlinks. Our minds are improvisational. They forget on purpose.]]></description>
     </item>
     <item>
       <title><![CDATA[Spacing Out]]></title>
-      <link>https://amadved.com/spacing-out/</link>
-      <guid>https://amadved.com/spacing-out/</guid>
+      <link>https://amadved.com/blog/spacing-out/</link>
+      <guid>https://amadved.com/blog/spacing-out/</guid>
       <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[I've quit meditating. Instead, I do nothing. The practice is basically the same but the framing is totally different. Meditation is somthing that highly driven people do to improve themselves; nothing is what lazy people do whenever they get the chance. Meditation is a chore; doing nothing is a relief. While meditating, you focus on your breath in order to still your thoughts; while doing nothing, you focus on your breath because breathing is the only thing you can't not do. This is a common pra...]]></description>
     </item>
     <item>
       <title><![CDATA[Senior Dev Confessions]]></title>
-      <link>https://amadved.com/senior-dev-confessions/</link>
-      <guid>https://amadved.com/senior-dev-confessions/</guid>
+      <link>https://amadved.com/blog/senior-dev-confessions/</link>
+      <guid>https://amadved.com/blog/senior-dev-confessions/</guid>
       <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Over the last 12 years that I've been writing software, my ability to deliver projects has increased. I especially notice this in context of pet projects, that I not only finish, but also continue using over time. You may say that this is just the accumulated experience, and I'll grant you that. But I believe that mostly the quality of code that I write didn't become significantly better, and neither did the speed with which I produce code. Alright, if not speed or quality - then what? My best g...]]></description>
     </item>
     <item>
       <title><![CDATA[Power of Ed]]></title>
-      <link>https://amadved.com/power-of-ed/</link>
-      <guid>https://amadved.com/power-of-ed/</guid>
+      <link>https://amadved.com/blog/power-of-ed/</link>
+      <guid>https://amadved.com/blog/power-of-ed/</guid>
       <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[## Batch edit with ed The other day at work I needed to edit 200 files at once across dozens of repos. I wanted to do something pretty simple: basically, I had files that looked like this: ``` foo: - bar - baz - bananas ``` and I wanted to insert an extra line after the baz line that said elephant ``` foo: - bar - baz - elephant - bananas ``` I had one extra weird requirement which was that some of the lines were indented with 2 spaces, and some with 4 spaces. The - elephant line needed to have ...]]></description>
     </item>
     <item>
       <title><![CDATA[Nature is healing]]></title>
-      <link>https://amadved.com/nature-is-healing/</link>
-      <guid>https://amadved.com/nature-is-healing/</guid>
+      <link>https://amadved.com/blog/nature-is-healing/</link>
+      <guid>https://amadved.com/blog/nature-is-healing/</guid>
       <pubDate>Thu, 29 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Sunlight filtering through the leaves of a tree, flowing water brushing against pebbles in a shallow lake, and playful birds flutter by. What was I feeling down about again?]]></description>
     </item>
     <item>
       <title><![CDATA[Simple interfaces]]></title>
-      <link>https://amadved.com/simple-interfaces/</link>
-      <guid>https://amadved.com/simple-interfaces/</guid>
+      <link>https://amadved.com/blog/simple-interfaces/</link>
+      <guid>https://amadved.com/blog/simple-interfaces/</guid>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[I enjoy simple user interfaces. - \* Small - \* One dimensional - \* One style - \* One font - \* Monotone - \* Static (no motion) - \* Space for visual hierarchy - \* Minimal cognitive load Hence my love for [~~motherfuckingwebsite.com~~](https://motherfuckingwebsite.com) text user interfaces. Communicating only the necessary information in it's most naked form, text. This is why the terminal is my preferred choice of interface to my personal computer. This is also why my blog is my preferred c...]]></description>
     </item>
     <item>
       <title><![CDATA[Less, more]]></title>
-      <link>https://amadved.com/less-more-2/</link>
-      <guid>https://amadved.com/less-more-2/</guid>
+      <link>https://amadved.com/blog/less-more-2/</link>
+      <guid>https://amadved.com/blog/less-more-2/</guid>
       <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Updated list of my last [less and more](/less-more/) post. ## \`\` Less - \* Compromises - \* Context switching - \* Indoors - \* Sitting - \* Late nights - \* Perfection ## \`\` More - \* Ruthlessness - \* Focus - \* Outdoors - \* Movement - \* Early mornings - \* Iteration]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Pull-ups, kefir & NetBSD]]></title>
-      <link>https://amadved.com/how-i-roll/</link>
-      <guid>https://amadved.com/how-i-roll/</guid>
-      <pubDate>Sun, 27 Apr 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[- \* Pull-ups on wood gymnastic rings - \* Homemade raw milk kefir - \* Custom-built NetBSD That's how I roll.]]></description>
     </item>
   </channel>
 </rss>

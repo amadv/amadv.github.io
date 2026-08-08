@@ -1,5 +1,5 @@
 up:
-	uv run generate_rss.py && git add . && git commit -m "update" && git push
+	perl generate_rss.pl && git add . && git commit -m "update" && git push
 
 rss:
-	uv run generate_rss.py
+	perl generate_rss.pl
