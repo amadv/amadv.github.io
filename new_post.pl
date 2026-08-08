@@ -21,7 +21,7 @@ use warnings;
 use FindBin;
 use POSIX qw(strftime);
 
-my $BLOG_TITLE = 'Dev.Madved';
+my $BLOG_TITLE = 'amadved';
 my $BASE       = $FindBin::Bin;
 my $INDEX      = "$BASE/index.html";
 
