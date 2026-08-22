@@ -1,0 +1,108 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus - amadved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+    import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Tradeless
+
+<!-- Ticker Input Form -->
+<form id="news-form" style="margin-bottom: 1em;">
+  <input type="text" id="symbol-input" placeholder="Enter ticker (e.g. BTC, ETH, AAPL)" value="BTC" required />
+  <button type="submit">Search News</button>
+</form>
+
+<ul id="news-container">
+  <li>Enter a symbol above to fetch news...</li>
+</ul>
+
+<script>
+  // Common crypto symbols mapped to Yahoo Finance pair structure
+  const CRYPTO_TICKERS = new Set(["BTC", "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX", "DOT", "LINK", "LTC"]);
+
+  function formatSymbol(rawInput) {
+    const symbol = rawInput.trim().toUpperCase();
+    
+    // Auto-append -USD if the user types a bare crypto symbol
+    if (CRYPTO_TICKERS.has(symbol) && !symbol.includes("-")) {
+      return `${symbol}-USD`;
+    }
+    return symbol;
+  }
+
+  async function fetchTickerNews(rawSymbol) {
+    const querySymbol = formatSymbol(rawSymbol);
+
+    const targetUrl = `https://query2.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(querySymbol)}&newsCount=8`;
+    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+
+    try {
+      const response = await fetch(proxyUrl);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const newsItems = data.news || [];
+
+      if (newsItems.length === 0) {
+        return [`No news found for ticker "${querySymbol}".`];
+      }
+
+      return newsItems.map(item => {
+        const title = item.title;
+        const publisher = item.publisher || "Unknown";
+        const link = item.link || "#";
+
+        return `[${publisher}] <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>`;
+      });
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      return ["Failed to fetch news. Please check the ticker symbol or try again later."];
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const newsForm = document.getElementById("news-form");
+    const symbolInput = document.getElementById("symbol-input");
+    const newsContainer = document.getElementById("news-container");
+
+    async function loadNews(symbol) {
+      newsContainer.innerHTML = "<li>Loading news...</li>";
+      const headlines = await fetchTickerNews(symbol);
+      
+      newsContainer.innerHTML = headlines
+        .map(headline => `<li>${headline}</li>`)
+        .join("");
+    }
+
+    // Handle form submit
+    newsForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const symbol = symbolInput.value;
+      if (symbol) {
+        loadNews(symbol);
+      }
+    });
+
+    // Load initial ticker news on page load
+    loadNews(symbolInput.value);
+  });
+</script>
+
+</body>
+</html>
