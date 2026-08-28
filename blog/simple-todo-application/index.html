@@ -1,0 +1,107 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple TODO application - amadved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Simple TODO application
+
+This article describes a TODO application or workflow.
+
+## Workflow
+
+It works like this:
+- Open any text editor.
+- Edit the text.
+- Save it in a file (probably named "TODO").
+- Feel happy about it.
+
+## The text format
+
+The text format I use is this:
+
+`[indendations]<symbol><SPACE><item text><NEWLINE>`
+
+Most of the time an item is just one line. This format is just a general guideline to keep the items somewhat structured.
+
+## Symbols
+
+Items are prefixed with a symbol.
+
+- - is an item which is planned to be done at some point.
+- x is an item which is done.
+- ? is an item which I'm not (yet) sure about. It can also be an idea.
+
+I use an indendation with a TAB before an item to indicate item dependencies. The items can be nested.
+
+For the prioritization I put the most important items and sections from the top to the bottom. These can be reshuffled as you wish of course.
+
+To delete an item you remove the line. To archive an item you keep the line.
+
+## Sections
+
+A section is a line which has no symbol. This is like a header to group items.
+
+## Examples
+
+```
+Checklist for releasing project 0.1:
+- Test project with different compilers and check for warnings.
+- Documentation:
+	- Proofread and make sure it matches all program behaviour.
+	- Run mandoc -Tlint on the man pages.
+	? Copy useful examples from the README file to the man page?
+- Run testsuite and check for failures before release.
+
+
+project 0.2:
+? Investigate if feature mentioned by some user is worth adding.
+```
+
+### Example: secure remote cloud-encrypted edit session(tm)
+`ssh -t host 'ed TODO'`
+
+### Example: multi-user secure remote cloud-encrypted edit session(tm)
+```
+ssh host
+tmux or tmux a
+ed TODO
+```
+
+### Example: version-controlled multi-user secure remote cloud-encrypted edit session(tm)
+```
+ssh host
+tmux or tmux a
+ed TODO
+git add TODO
+git commit -m 'TODO: update'
+```
+
+## Pros
+- When you open the TODO file the most important items are at the top.
+- The items are easy to read and modify with any text editor.
+- It is easy to extend the format and use with other text tools.
+- The format is portable: it works on sticky-notes on your CRT monitor too!
+- No monthly online subscription needed and full NO-money-back guarantee.
+
+## Cons
+- Complex lists with interconnected dependencies might not work, maybe.
+- It's assumed there is one person maintaining the TODO file. Merging items from multiple people at the same time in this workflow is not recommended.
+- It is too simple: noone will be impressed by it.
+
+</body>
+</html>

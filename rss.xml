@@ -5,7 +5,7 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Aug 2026 16:20:30 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 28 Aug 2026 01:18:28 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
@@ -15,6 +15,13 @@
       <guid>https://amadved.com/blog/i-blog-with-raw-html/</guid>
       <pubDate>Sun, 06 Sep 2026 00:00:00 +0000</pubDate>
       <description><![CDATA[The blog you're reading is written directly for web browsers. no extra build step. The blog have many reincarnations, the longest lived one is based on [hugo](https://gohugo.io/). However, even a static site generator will deprecate some features one day. and my words need to follow the convention of that static site generator. And one day, the blog is broken. And I don't want my blog to have a build step anymore. Therefore, the blog you're reading now is written directly for the browers, with [...]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Simple TODO application]]></title>
+      <link>https://amadved.com/blog/simple-todo-application/</link>
+      <guid>https://amadved.com/blog/simple-todo-application/</guid>
+      <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # Simple TODO application]]></description>
     </item>
     <item>
       <title><![CDATA[Architecture for Scaling Agents]]></title>
@@ -141,13 +148,6 @@
       <guid>https://amadved.com/blog/simple-interfaces/</guid>
       <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[I enjoy simple user interfaces. - \* Small - \* One dimensional - \* One style - \* One font - \* Monotone - \* Static (no motion) - \* Space for visual hierarchy - \* Minimal cognitive load Hence my love for [~~motherfuckingwebsite.com~~](https://motherfuckingwebsite.com) text user interfaces. Communicating only the necessary information in it's most naked form, text. This is why the terminal is my preferred choice of interface to my personal computer. This is also why my blog is my preferred c...]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Less, more]]></title>
-      <link>https://amadved.com/blog/less-more-2/</link>
-      <guid>https://amadved.com/blog/less-more-2/</guid>
-      <pubDate>Sat, 10 May 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[Updated list of my last [less and more](/less-more/) post. ## \`\` Less - \* Compromises - \* Context switching - \* Indoors - \* Sitting - \* Late nights - \* Perfection ## \`\` More - \* Ruthlessness - \* Focus - \* Outdoors - \* Movement - \* Early mornings - \* Iteration]]></description>
     </item>
   </channel>
 </rss>

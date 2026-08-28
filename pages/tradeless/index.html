@@ -7,8 +7,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <link rel="stylesheet" href="/index.css">
+
+  <!-- PyScript Core Assets -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
   <script type="module">
-    import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
     document.body.innerHTML =
       marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
     hljs.highlightAll();
@@ -18,90 +23,59 @@
 
 [ ../ ](/)
 
-# Tradeless
+# Focus
 
-<!-- Ticker Input Form -->
-<form id="news-form" style="margin-bottom: 1em;">
-  <input type="text" id="symbol-input" placeholder="Enter ticker (e.g. BTC, ETH, AAPL)" value="BTC" required />
-  <button type="submit">Search News</button>
-</form>
+Just do it.
 
-<ul id="news-container">
-  <li>Enter a symbol above to fetch news...</li>
-</ul>
+<!-- PyScript Execution Area -->
+<div id="news-output">Loading market news...</div>
 
-<script>
-  // Common crypto symbols mapped to Yahoo Finance pair structure
-  const CRYPTO_TICKERS = new Set(["BTC", "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX", "DOT", "LINK", "LTC"]);
+<script type="py">
+import json
+from pyodide.http import pyfetch
+from js import document
 
-  function formatSymbol(rawInput) {
-    const symbol = rawInput.trim().toUpperCase();
+async def fetch_ticker_news(symbol="BTC"):
+    # Bypassing yfinance: Fetch Yahoo Finance API via CORS proxy directly in PyScript
+    target_url = f"https://query2.finance.yahoo.com/v1/finance/search?q={symbol}"
+    proxy_url = f"https://api.allorigins.win/get?url={encodeURIComponent(target_url)}"
+
+    try:
+        response = await pyfetch(proxy_url)
+        data = await response.json()
+        
+        # Parse nested proxy payload
+        contents = json.loads(data.get("contents", "{}"))
+        news_items = contents.get("news", [])
+
+        if not news_items:
+            return ["Warning: Received empty response from Yahoo Finance."]
+
+        clean_headlines = []
+        for item in news_items:
+            title = item.get("title")
+            publisher = item.get("publisher", "Unknown")
+            url = item.get("link", "#")
+
+            if title:
+                clean_headlines.append(f"• [{publisher}] <a href='{url}' target='_blank'>{title}</a>")
+
+        return clean_headlines
+
+    except Exception as e:
+        return [f"Error fetching news: {e}"]
+
+# JavaScript helper function for URL encoding
+from js import encodeURIComponent
+
+async def main():
+    headlines = await fetch_ticker_news("BTC")
     
-    // Auto-append -USD if the user types a bare crypto symbol
-    if (CRYPTO_TICKERS.has(symbol) && !symbol.includes("-")) {
-      return `${symbol}-USD`;
-    }
-    return symbol;
-  }
+    # Render results into the DOM
+    output_html = "<h3>--- Market News ---</h3>" + "<br>".join(headlines[:8])
+    document.getElementById("news-output").innerHTML = output_html
 
-  async function fetchTickerNews(rawSymbol) {
-    const querySymbol = formatSymbol(rawSymbol);
-
-    const targetUrl = `https://query2.finance.yahoo.com/v1/finance/search?q=${encodeURIComponent(querySymbol)}&newsCount=8`;
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
-
-    try {
-      const response = await fetch(proxyUrl);
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const newsItems = data.news || [];
-
-      if (newsItems.length === 0) {
-        return [`No news found for ticker "${querySymbol}".`];
-      }
-
-      return newsItems.map(item => {
-        const title = item.title;
-        const publisher = item.publisher || "Unknown";
-        const link = item.link || "#";
-
-        return `[${publisher}] <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-      });
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      return ["Failed to fetch news. Please check the ticker symbol or try again later."];
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const newsForm = document.getElementById("news-form");
-    const symbolInput = document.getElementById("symbol-input");
-    const newsContainer = document.getElementById("news-container");
-
-    async function loadNews(symbol) {
-      newsContainer.innerHTML = "<li>Loading news...</li>";
-      const headlines = await fetchTickerNews(symbol);
-      
-      newsContainer.innerHTML = headlines
-        .map(headline => `<li>${headline}</li>`)
-        .join("");
-    }
-
-    // Handle form submit
-    newsForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const symbol = symbolInput.value;
-      if (symbol) {
-        loadNews(symbol);
-      }
-    });
-
-    // Load initial ticker news on page load
-    loadNews(symbolInput.value);
-  });
+await main()
 </script>
 
 </body>
