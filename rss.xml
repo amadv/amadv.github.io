@@ -5,10 +5,17 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 28 Aug 2026 01:18:28 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2026 12:30:43 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
+    <item>
+      <title><![CDATA[Go vs Py]]></title>
+      <link>https://amadved.com/blog/go-vs-py/</link>
+      <guid>https://amadved.com/blog/go-vs-py/</guid>
+      <pubDate>Mon, 07 Sep 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # Go vs Py]]></description>
+    </item>
     <item>
       <title><![CDATA[Writing Directly for Browsers]]></title>
       <link>https://amadved.com/blog/i-blog-with-raw-html/</link>
@@ -21,7 +28,7 @@
       <link>https://amadved.com/blog/simple-todo-application/</link>
       <guid>https://amadved.com/blog/simple-todo-application/</guid>
       <pubDate>Fri, 28 Aug 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[[ ../ ](/) # Simple TODO application]]></description>
+      <description><![CDATA[This article describes a TODO application or workflow. ## Workflow It works like this: - Open any text editor. - Edit the text. - Save it in a file (probably named "TODO"). - Feel happy about it. ## The text format The text format I use is this: `[indendations]` Most of the time an item is just one line. This format is just a general guideline to keep the items somewhat structured. ## Symbols Items are prefixed with a symbol. - `-` is an item which is planned to be done at some point. - x is an ...]]></description>
     </item>
     <item>
       <title><![CDATA[Architecture for Scaling Agents]]></title>
@@ -141,13 +148,6 @@
       <guid>https://amadved.com/blog/nature-is-healing/</guid>
       <pubDate>Thu, 29 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Sunlight filtering through the leaves of a tree, flowing water brushing against pebbles in a shallow lake, and playful birds flutter by. What was I feeling down about again?]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Simple interfaces]]></title>
-      <link>https://amadved.com/blog/simple-interfaces/</link>
-      <guid>https://amadved.com/blog/simple-interfaces/</guid>
-      <pubDate>Fri, 16 May 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[I enjoy simple user interfaces. - \* Small - \* One dimensional - \* One style - \* One font - \* Monotone - \* Static (no motion) - \* Space for visual hierarchy - \* Minimal cognitive load Hence my love for [~~motherfuckingwebsite.com~~](https://motherfuckingwebsite.com) text user interfaces. Communicating only the necessary information in it's most naked form, text. This is why the terminal is my preferred choice of interface to my personal computer. This is also why my blog is my preferred c...]]></description>
     </item>
   </channel>
 </rss>

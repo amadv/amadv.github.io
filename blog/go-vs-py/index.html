@@ -1,0 +1,30 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go vs Py - amadved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Go vs Py
+
+If you’re building something small — a prototype, an admin panel, a bot — stick with Python. You’ll ship faster. If you’re building something that needs to feel instant — a social feed, a real-time dashboard, an API for hundreds of users — try Go.
+
+You don’t need microservices. You don’t need Kubernetes. You don’t need a team of 10. You just need a binary that sits on a tiny VPS and doesn’t fall over when your friends are online.
+
+Go gave me that. Maybe it will give you that too.
+
+</body>
+</html>
