@@ -5,16 +5,23 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Sep 2026 12:30:43 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Sep 2026 21:36:46 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
+    <item>
+      <title><![CDATA[Markdown is the new code]]></title>
+      <link>https://amadved.com/blog/markdown-is-the-new-code/</link>
+      <guid>https://amadved.com/blog/markdown-is-the-new-code/</guid>
+      <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # Markdown is the new code]]></description>
+    </item>
     <item>
       <title><![CDATA[Go vs Py]]></title>
       <link>https://amadved.com/blog/go-vs-py/</link>
       <guid>https://amadved.com/blog/go-vs-py/</guid>
       <pubDate>Mon, 07 Sep 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[[ ../ ](/) # Go vs Py]]></description>
+      <description><![CDATA[If you’re building something small a prototype, an admin panel, a bot stick with Python. You’ll ship faster. If you’re building something that needs to feel instant a social feed, a real-time dashboard, an API for hundreds of users try Go. You don’t need microservices. You don’t need Kubernetes. You don’t need a team of 10. You just need a binary that sits on a tiny VPS and doesn’t fall over when your friends are online. Go gave me that. Maybe it will give you that too.]]></description>
     </item>
     <item>
       <title><![CDATA[Writing Directly for Browsers]]></title>
@@ -141,13 +148,6 @@
       <guid>https://amadved.com/blog/power-of-ed/</guid>
       <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[## Batch edit with ed The other day at work I needed to edit 200 files at once across dozens of repos. I wanted to do something pretty simple: basically, I had files that looked like this: ``` foo: - bar - baz - bananas ``` and I wanted to insert an extra line after the baz line that said elephant ``` foo: - bar - baz - elephant - bananas ``` I had one extra weird requirement which was that some of the lines were indented with 2 spaces, and some with 4 spaces. The - elephant line needed to have ...]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Nature is healing]]></title>
-      <link>https://amadved.com/blog/nature-is-healing/</link>
-      <guid>https://amadved.com/blog/nature-is-healing/</guid>
-      <pubDate>Thu, 29 May 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[Sunlight filtering through the leaves of a tree, flowing water brushing against pebbles in a shallow lake, and playful birds flutter by. What was I feeling down about again?]]></description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,49 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown is the new code - amadved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Markdown is the new code
+
+I'm lazy and I live in the terminal.
+AI is taking over the world and models are becoming cheaper. If this cheaper and more accessable progression continues then the statement of markdown becoming the new programming language is on the horizon. If not and these companies want to hook us on there product and then years down the line we become so docile and dependent on the products that we can't work without them anymore. 
+
+Both sitations are too far and out of site, and believe it or not I enjoy this style of development. So let me break it down for you.
+
+## Markdown is becoming source code, not just documentation.
+
+When you're generating code with AI, the prompts that made it usually vanish. What is left? its the code itself. But the why behind it, and the decisions, all of that gets lost.
+
+My suggestion is simple. Check your Markdown into `/src/md`, right next to the code it describes.
+
+Why Markdown? 
+It's plain text, so you can diff it, grep it, review it in a PR. LLMs read and write it natively and us humans can read and edit it without any special tools like vim.
+
+Whats in this markdow? 
+Architectural decisions, source level decisions, low level data design decisions. It's closer to a spec than a design doc, but its not quite either.
+
+Another big win is locality. 
+The intent lives with the code. No more hunting through wikis, Slack threads, or Jira tickets to figure out why something works the way it does. Both humans and agents get the context in one place.
+
+As for tests my opinion is to seperate it, the split should be markdown in /src is the spec, tests in /test confirm it. Write the markdown first, then derive the code and tests from it. Not tests, first lets not be masochistics here.
+
+I don't know exactly what the right structure for /src/md looks like yet. That part is still forming. But I'm pretty confident about the direction. Markdown is becoming source code, and we should start treating it that way.
+
+
+</body>
+</html>
