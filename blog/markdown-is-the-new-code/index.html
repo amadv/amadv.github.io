@@ -45,5 +45,18 @@ As for tests my opinion is to seperate it, the split should be markdown in /src 
 I don't know exactly what the right structure for /src/md looks like yet. That part is still forming. But I'm pretty confident about the direction. Markdown is becoming source code, and we should start treating it that way.
 
 
+example:
+```
+src/
+  md/
+    README.md          # index of all md, entry point for agents
+    TODO.md            # a list of general TODOs open for this module
+    OVERVIEW.md        # a technical overview of this module
+    features/FEATURE_1.md       # a set of feature-specific documents
+    data/DATAMODEL_1.md         # descriptions of data models in the module
+    api/API_1.md                # descriptions of APIs the module provides
+    infrastructure/INFRASTRUCTURE_1.md   # descriptions of infrastructure used by the module
+```
+
 </body>
 </html>
