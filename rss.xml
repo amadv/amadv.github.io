@@ -5,23 +5,30 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Fri, 25 Sep 2026 23:31:54 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 09 Oct 2026 12:50:03 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
+    <item>
+      <title><![CDATA[Brat.sh: A Router for Unix Tools]]></title>
+      <link>https://amadved.com/blog/brat-sh-a-router-for-unix-tools/</link>
+      <guid>https://amadved.com/blog/brat-sh-a-router-for-unix-tools/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # Brat.sh: A Router for Unix Tools]]></description>
+    </item>
     <item>
       <title><![CDATA[travel west vs east]]></title>
       <link>https://amadved.com/blog/travel-west-vs-east/</link>
       <guid>https://amadved.com/blog/travel-west-vs-east/</guid>
       <pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[[ ../ ](/) # travel west vs east]]></description>
+      <description><![CDATA[This is often lost between cultures, and hard to understand for each side. Lets keep this simple. The west travels to spend money cruse ships, high end hotels, and lavish expensives, sprinkled with sovineers. The east travels to save money to go somewhere to obtain something either gifts for others, education, work, experience. Chew on that.]]></description>
     </item>
     <item>
       <title><![CDATA[west person working in east and vice versa]]></title>
       <link>https://amadved.com/blog/west-person-working-in-east-and-vice-versa/</link>
       <guid>https://amadved.com/blog/west-person-working-in-east-and-vice-versa/</guid>
       <pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[[ ../ ](/) # west person working in east and vice versa]]></description>
+      <description><![CDATA[Usually when a person works in another country, or is going for education or experience they are looked upon differently in the west vs the east. My friends in asia go to europe or america for work or school and when they come back they are highly regarded for there experience that they learned in the other countries. Often associated with high pay and respect to their peers. On the contray from my experience when a westerner goes to asia for work or school they are seen as taking time off to go...]]></description>
     </item>
     <item>
       <title><![CDATA[Markdown is the new code]]></title>
@@ -141,13 +148,6 @@
       <guid>https://amadved.com/blog/delete-second-brain/</guid>
       <pubDate>Sat, 12 Jul 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[Human memory is not an archive. It is associative, embodied, contextual, and emotional. We do not think in folders. We do not retrieve meaning through backlinks. Our minds are improvisational. They forget on purpose.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Spacing Out]]></title>
-      <link>https://amadved.com/blog/spacing-out/</link>
-      <guid>https://amadved.com/blog/spacing-out/</guid>
-      <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[I've quit meditating. Instead, I do nothing. The practice is basically the same but the framing is totally different. Meditation is somthing that highly driven people do to improve themselves; nothing is what lazy people do whenever they get the chance. Meditation is a chore; doing nothing is a relief. While meditating, you focus on your breath in order to still your thoughts; while doing nothing, you focus on your breath because breathing is the only thing you can't not do. This is a common pra...]]></description>
     </item>
   </channel>
 </rss>

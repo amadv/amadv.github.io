@@ -1,0 +1,205 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brat.sh: A Router for Unix Tools - amadved</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <link rel="stylesheet" href="/index.css">
+  <script type="module">
+  import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
+    document.body.innerHTML =
+      marked.parse(document.body.innerHTML.replace(/&lt;+/g, '<').replace(/&gt;+/g, '>').replace(/&amp;+/g, '&'));
+    hljs.highlightAll();
+  </script>
+</head>
+<body>
+
+[ ../ ](/)
+
+# Brat: A Router for Unix Tools
+
+If you've ever grown a shell script past a few hundred lines, you know the feeling. The `if`/`elif` chain at the top that dispatches on `$1`. The tangle of functions nobody dares reorder. The instinct to rewrite the whole thing in Python — even though it only ever shells out to `git`, `find`, and `tar`.
+
+**Brat** is a different answer. It's a single-file POSIX shell script — about 120 lines of actual logic — that turns your growing script into a *program*: a front-end executable that routes to a collection of small commands, Git-style.
+
+```
+$ myprog build --release
+    ↓  your shell finds myprog (Brat) somewhere in your PATH
+  bin/myprog build --release
+    ↓  Brat extends PATH, finds myprog-build, and runs it
+  libexec/myprog-build --release
+```
+
+That's the whole idea. You drop Brat into `bin/myprog`, add tiny executables to `libexec/`, and it dispatches by name.
+
+## Why bother?
+
+Because each command becomes a separate process with its own arguments, standard I/O, and exit status. Your program turns into a composition of independently testable parts, and you never write another `case "$1" in` block.
+
+There's no runtime to install, either — just a POSIX shell and the standard utilities (`awk`, `find`, `realpath`, `sort`, `tr`). The same script runs on Alpine, Debian, Fedora, FreeBSD, and macOS. And because Brat is *feature-complete*, you're not adopting a moving target: it's built to keep working unmodified for years.
+
+## The layout
+
+Brat infers everything from its own filename and location. A program named `myprog` looks like this:
+
+```
+myprog/
+├── bin/
+│   └── myprog            # the router (Brat)
+├── lib/
+│   └── myprog/           # shared library files
+│       ├── _init.sh      # optional init hook
+│       └── myprog.sh     # shared helpers/aliases
+└── libexec/              # command executables
+    └── myprog-<command>
+```
+
+`libexec/` usually isn't on the `PATH` in an interactive shell, so your commands stay hidden. Users only see what's in `bin/`.
+
+## Let's build one
+
+Set up the skeleton:
+
+```sh
+mkdir myprog && cd myprog
+mkdir -p bin lib/myprog libexec
+
+curl -sL https://github.com/amadv/brat >bin/myprog
+chmod +x bin/myprog
+
+touch lib/myprog/_init.sh lib/myprog/myprog.sh
+```
+
+Add three aliases to `myprog.sh` so every command can reach Brat's shared helpers:
+
+```sh
+# lib/myprog/myprog.sh
+alias self='"$SELF"'
+alias error='self --- error "$0"'
+alias usage='self --- usage "$0" "${USAGE:-}"'
+```
+
+Now a command. Save this as `libexec/myprog-hello` and make it executable:
+
+```sh
+#!/bin/sh
+set -eu
+. myprog.sh
+echo "hello!"
+```
+
+```sh
+chmod +x libexec/myprog-hello
+```
+
+Run it. Brat puts `lib/` first on `PATH`, which is why the bare `. myprog.sh` works:
+
+```console
+$ bin/myprog
+usage: myprog <COMMAND>
+commands: hello
+$ bin/myprog hello
+hello!
+```
+
+Note that `hello` showed up in the command list automatically — no registration, no manifest.
+
+## Arguments, without the ceremony
+
+Brat takes a hands-off approach to argument syntax. It finds the command by skipping over anything that starts with a hyphen, then passes everything — before and after the command name — through in its original order.
+
+| Invocation | Command | Arguments |
+| --- | --- | --- |
+| `myprog build a` | `build` | `a` |
+| `myprog -v build a` | `build` | `-v a` |
+| `myprog build -v a` | `build` | `-v a` |
+| `myprog --file=out.txt build` | `build` | `--file=out.txt` |
+| `myprog build --file out.txt` | `build` | `--file out.txt` |
+
+The one gotcha: an option/value *pair* can't precede the command name, because `out.txt` looks like the command:
+
+```console
+$ myprog --file out.txt build
+myprog: no such command: out.txt
+```
+
+Everything after the command name is fine.
+
+## Errors and usage, the consistent way
+
+Commands fail the same way everywhere, thanks to the aliases:
+
+```sh
+#!/bin/sh
+set -eu
+. myprog.sh
+USAGE="deploy <HOST>"
+[ $# -eq 1 ] || usage
+```
+
+```console
+$ bin/myprog deploy
+usage: myprog deploy <HOST>
+```
+
+The `USAGE` variable is just a convention — set it once, call `usage` with no arguments, and get a proper synopsis on standard error with a non-zero status.
+
+## Grouping commands: namespaces
+
+When a handful of commands belong together, group them under a namespace. A namespace is simply a symlink back to the router, plus a matching `lib/` directory:
+
+```sh
+ln -s ../bin/myprog libexec/myprog-env
+mkdir -p lib/myprog-env
+touch lib/myprog-env/_init.sh
+```
+
+Now `libexec/myprog-env-list`, `myprog-env-set`, and friends become commands of the `env` namespace:
+
+```console
+$ bin/myprog env
+usage: myprog env <COMMAND>
+commands: list set
+$ bin/myprog env list
+...
+```
+
+Under the hood, `myprog env list` invokes the router a second time through the symlink (`NAME` becomes `myprog-env`), which then finds `myprog-env-list`. Nested routing, no special cases.
+
+## Hiding helper executables
+
+Any executable with two hyphens anywhere in its name is **private** — never dispatched to, never listed:
+
+```
+libexec/myprog-build--compile     # internal helper for `myprog build`
+libexec/myprog-build              # the visible command
+```
+
+Since Brat puts `libexec/` on the `PATH`, `myprog-build` can call `myprog-build--compile` directly. You may be wondering how `myprog-build--compile` and `myprog-build` can coexist. They can't — the last one has to be named differently, e.g. `myprog-build-main`. The point is that commands can factor shared logic into internal executables without leaking them into the user-facing command list.
+
+## Seeing what the router sees
+
+When something isn't routing the way you expect, ask Brat directly with the special `---` argument:
+
+```console
+$ bin/myprog --- executables   # every executable in the current namespace
+$ bin/myprog --- env           # the full environment commands run under
+$ bin/myprog --- version       # the content-addressed version
+```
+
+The same mechanism is what powers `error` and `usage` from inside commands — `"$SELF" --- error "$0" ...` calls back into the router's own helpers.
+
+## When you're ready to grow
+
+- **Commands can live anywhere in `PATH`.** Brat searches for `<program>-<command>` across the whole path, so a plugin can add commands without touching your tree.
+- **Commands can be any language.** They're just executables. Shell is the default, not a requirement.
+- **Set `VERSION` in `_init.sh`** to enable `myprog --version`.
+
+The full annotated source *is* the manual — Brat is a literate program, with the documentation and the code interleaved in `brat.sh` and the manual generated from it. If you want to know exactly how routing works, read the source; the prose is right there next to the code it describes.
+
+Brat is MIT-0 licensed. Grab it, rename it, ship it.
+
+</body>
+</html>
