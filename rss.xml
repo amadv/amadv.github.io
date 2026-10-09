@@ -5,16 +5,30 @@
     <link>https://amadved.com</link>
     <description>Personal blog of Aaron Madved - doing loops</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 22 Sep 2026 21:36:46 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Sep 2026 23:31:54 +0000</lastBuildDate>
     <atom:link href="https://amadved.com/rss.xml" rel="self" type="application/rss+xml" />
     <managingEditor>aaronmadved@gmail.com (Amadv)</managingEditor>
     <webMaster>aaronmadved@gmail.com (Amadv)</webMaster>
+    <item>
+      <title><![CDATA[travel west vs east]]></title>
+      <link>https://amadved.com/blog/travel-west-vs-east/</link>
+      <guid>https://amadved.com/blog/travel-west-vs-east/</guid>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # travel west vs east]]></description>
+    </item>
+    <item>
+      <title><![CDATA[west person working in east and vice versa]]></title>
+      <link>https://amadved.com/blog/west-person-working-in-east-and-vice-versa/</link>
+      <guid>https://amadved.com/blog/west-person-working-in-east-and-vice-versa/</guid>
+      <pubDate>Fri, 25 Sep 2026 00:00:00 +0000</pubDate>
+      <description><![CDATA[[ ../ ](/) # west person working in east and vice versa]]></description>
+    </item>
     <item>
       <title><![CDATA[Markdown is the new code]]></title>
       <link>https://amadved.com/blog/markdown-is-the-new-code/</link>
       <guid>https://amadved.com/blog/markdown-is-the-new-code/</guid>
       <pubDate>Tue, 22 Sep 2026 00:00:00 +0000</pubDate>
-      <description><![CDATA[[ ../ ](/) # Markdown is the new code]]></description>
+      <description><![CDATA[I'm lazy and I live in the terminal. AI is taking over the world and models are becoming cheaper. If this cheaper and more accessable progression continues then the statement of markdown becoming the new programming language is on the horizon. If not and these companies want to hook us on there product and then years down the line we become so docile and dependent on the products that we can't work without them anymore. Both sitations are too far and out of site, and believe it or not I enjoy th...]]></description>
     </item>
     <item>
       <title><![CDATA[Go vs Py]]></title>
@@ -134,20 +148,6 @@
       <guid>https://amadved.com/blog/spacing-out/</guid>
       <pubDate>Fri, 11 Jul 2025 00:00:00 +0000</pubDate>
       <description><![CDATA[I've quit meditating. Instead, I do nothing. The practice is basically the same but the framing is totally different. Meditation is somthing that highly driven people do to improve themselves; nothing is what lazy people do whenever they get the chance. Meditation is a chore; doing nothing is a relief. While meditating, you focus on your breath in order to still your thoughts; while doing nothing, you focus on your breath because breathing is the only thing you can't not do. This is a common pra...]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Senior Dev Confessions]]></title>
-      <link>https://amadved.com/blog/senior-dev-confessions/</link>
-      <guid>https://amadved.com/blog/senior-dev-confessions/</guid>
-      <pubDate>Tue, 10 Jun 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[Over the last 12 years that I've been writing software, my ability to deliver projects has increased. I especially notice this in context of pet projects, that I not only finish, but also continue using over time. You may say that this is just the accumulated experience, and I'll grant you that. But I believe that mostly the quality of code that I write didn't become significantly better, and neither did the speed with which I produce code. Alright, if not speed or quality - then what? My best g...]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Power of Ed]]></title>
-      <link>https://amadved.com/blog/power-of-ed/</link>
-      <guid>https://amadved.com/blog/power-of-ed/</guid>
-      <pubDate>Fri, 30 May 2025 00:00:00 +0000</pubDate>
-      <description><![CDATA[## Batch edit with ed The other day at work I needed to edit 200 files at once across dozens of repos. I wanted to do something pretty simple: basically, I had files that looked like this: ``` foo: - bar - baz - bananas ``` and I wanted to insert an extra line after the baz line that said elephant ``` foo: - bar - baz - elephant - bananas ``` I had one extra weird requirement which was that some of the lines were indented with 2 spaces, and some with 4 spaces. The - elephant line needed to have ...]]></description>
     </item>
   </channel>
 </rss>
